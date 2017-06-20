@@ -1,0 +1,26 @@
+[Unit]
+Description=NodeJS Game for {{ service.project }} {{ service.gametype }} {{ service.tableid }}
+Requires=network.tserviceet
+After=syslog.tserviceet network.tserviceet
+
+[Service]
+ExecStart=/usr/bin/node /var/nodejs/p2p_game_engine/index.js
+ExecReload=/bin/kill -TERM $MAINPID
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=NodeJS P2P-{{ service.project }}-{{ service.tableid }}
+User=root
+Group=root
+KillSignal=SIGTERM
+KillMode=process
+Restart=on-failure
+RestartSec=2
+StartLimitInterval=10s
+StartLimitBurst=2
+Environment=NODE_ENV=staging
+Environment=APP_NAME=GE_{{ service.project }}
+Environment=TABLE={{ service.tableid }}
+Environment=NODE_PATH=/usr/lib/node_modules
+
+[Install]
+WantedBy=multi-user.tserviceet
