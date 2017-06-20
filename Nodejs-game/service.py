@@ -29,7 +29,7 @@ def loader_template(name, searchpath='templates', *args, **kwargs):
 class BaseService:
     def __init__(self, service_name, service_directory="/etc/systemd/system"):
         re_str = "(?P<appname>\w+)-(?P<gametype>\w+)-\w+-(?P<tableid>\d+).*"
-        m = re.match(re_str, 'BIGTWO-P2P-TABLE-3284.service').groupdict()
+        m = re.match(re_str, service_name).groupdict()
         self.service_name = service_name
         self.appname = m['appname']
         self.tableid = m['tableid']
@@ -72,9 +72,10 @@ class BaseService:
                    'tableid': self.tableid,
                    'gametype': self.gametype
                    }
-        service_connext = loader_template(name='p2p-template.service', searchpath='templates', service=service)
+        service_connext = loader_template(name='p2p-templates.service', searchpath='templates', service=service)
         with open(servicefile, 'w') as f:
             f.write(service_connext)
+        self.enable()
         if start == True:
             self.start()
 
@@ -88,9 +89,15 @@ class BaseService:
 
 def man():
     argv = sys.argv[0:]
-    active = argv[0]
+    active = sys.argv[1]
+    active_list = ['start', 'stop']
+    if active not in active_list:
+        sys.exit(244)
     service = BaseService(argv[2])
-    service.start()
+    if active == 'start':
+        service.start()
+    elif active == 'stop':
+        service.stop()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     man()
