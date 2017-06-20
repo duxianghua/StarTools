@@ -91,3 +91,6 @@ def man():
     active = argv[0]
     service = BaseService(argv[2])
     service.start()
+
+if __name__ == "__main__":
+    man()
