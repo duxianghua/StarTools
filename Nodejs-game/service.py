@@ -57,6 +57,7 @@ class BaseService:
     def enable(self):
         cmd = "systemctl enable %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
+        local_log.info(rev)
 
     def disable(self):
         cmd = "systemctl disable %s" % self.service_name
@@ -68,10 +69,7 @@ class BaseService:
 
     def add_service(self, start=False):
         servicefile = os.path.join(self.service_directory, self.service_name)
-        service = {'project': self.appname,
-                   'tableid': self.tableid,
-                   'gametype': self.gametype
-                   }
+        service = {'project': self.appname, 'tableid': self.tableid, 'gametype': self.gametype}
         service_connext = loader_template(name='p2p-template.service', searchpath='templates', service=service)
         with open(servicefile, 'w') as f:
             f.write(service_connext)

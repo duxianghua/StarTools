@@ -1,7 +1,7 @@
 [Unit]
 Description=NodeJS Game for {{ service.project }} {{ service.gametype }} {{ service.tableid }}
-Requires=network.tserviceet
-After=syslog.tserviceet network.tserviceet
+Requires=network.target
+After=syslog.target network.target
 
 [Service]
 ExecStart=/usr/bin/node /var/nodejs/p2p_game_engine/index.js
@@ -23,4 +23,4 @@ Environment=TABLE={{ service.tableid }}
 Environment=NODE_PATH=/usr/lib/node_modules
 
 [Install]
-WantedBy=multi-user.tserviceet
+WantedBy=multi-user.target
