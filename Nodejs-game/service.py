@@ -72,7 +72,7 @@ class BaseService:
                    'tableid': self.tableid,
                    'gametype': self.gametype
                    }
-        service_connext = loader_template(name='p2p-templates.service', searchpath='templates', service=service)
+        service_connext = loader_template(name='p2p-template.service', searchpath='templates', service=service)
         with open(servicefile, 'w') as f:
             f.write(service_connext)
         self.enable()
