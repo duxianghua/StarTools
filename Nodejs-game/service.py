@@ -6,6 +6,18 @@ import re
 import sys
 import os
 
+def setup_console_logger():
+    logging.root.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(
+        '[%(levelname)-8s] %(message)s', datefmt='%H:%M:%S'
+    )
+    StreamHandler = logging.StreamHandler()
+    StreamHandler.setFormatter(formatter)
+    StreamHandler.setLevel(logging.DEBUG)
+    logging.root.addHandler(StreamHandler)
+
+setup_console_logger()
+
 local_log = logging.getLogger(__name__)
 
 def loader_template(name, searchpath='templates', *args, **kwargs):
@@ -78,4 +90,4 @@ def man():
     argv = sys.argv[0:]
     active = argv[0]
     service = BaseService(argv[2])
-    service.active()
+    service.start()
