@@ -1,6 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
 import logging
-import ../log
+#import log
 import commands
 import re
 import sys
