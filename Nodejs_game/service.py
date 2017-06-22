@@ -51,12 +51,31 @@ class BaseService:
     def enable(self):
         cmd = "systemctl enable %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
-        log.info(rev)
+        log.debug(rev)
 
     def disable(self):
         cmd = "systemctl disable %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
         log.debug(rev)
+
+    def restart(self):
+        cmd = "systemctl restart %s" % self.service_name
+        status, rev = commands.getstatusoutput(cmd)
+        if status == '0':
+            return True
+        else:
+            return False
+            log.error(rev)
+
+    def reload(self):
+        cmd = "systemctl reload %s" % self.service_name
+        status, rev = commands.getstatusoutput(cmd)
+        log.debug(rev)
+        if status == '0':
+            return True
+        else:
+            return False
+            log.error(rev)
 
     def check_service(self):
         servicefile = os.path.join(self.service_directory, self.service_name)
@@ -88,7 +107,7 @@ def man():
     if len(argv) <= 2:
         sys.exit(244)
     active = sys.argv[1]
-    active_list = ['start', 'stop']
+    active_list = ['start', 'stop', 'restart', 'reload']
     service_name = argv[2]
     if active not in active_list:
         log.error('Unknow command: %s' % active)
@@ -107,6 +126,20 @@ def man():
             sys.exit(0)
         else:
             log.info('Stop service %s error' % service_name)
+            sys.exit(1)
+    elif active == 'restart':
+        if service.stop() == True:
+            log.info('Restart service %s done' % service_name)
+            sys.exit(0)
+        else:
+            log.info('Restart service %s error' % service_name)
+            sys.exit(1)
+    elif active == 'reload':
+        if service.stop() == True:
+            log.info('Reload service %s done' % service_name)
+            sys.exit(0)
+        else:
+            log.info('Reload service %s error' % service_name)
             sys.exit(1)
 
 if __name__ == '__main__':
