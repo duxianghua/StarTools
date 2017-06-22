@@ -7,11 +7,10 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
-import log
 
 
 
-__log = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 def loader_template(name, searchpath='templates', *args, **kwargs):
     env = Environment(loader=FileSystemLoader(searchpath))
@@ -34,10 +33,10 @@ class BaseService:
         if self.check_service():
             status,rev = commands.getstatusoutput(cmd)
             if status == 0:
-                __log.info(rev)
+                log.info(rev)
                 return True
             else:
-                __log.error('Execute %s receive error info (%s)' %(cmd, rev))
+                log.error('Execute %s receive error info (%s)' %(cmd, rev))
                 return False
         else:
             self.add_service(start=True)
@@ -51,7 +50,7 @@ class BaseService:
     def enable(self):
         cmd = "systemctl enable %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
-        __log.info(rev)
+        log.info(rev)
 
     def disable(self):
         cmd = "systemctl disable %s" % self.service_name
@@ -107,4 +106,6 @@ def man():
             sys.exit(1)
 
 if __name__ == '__main__':
+    from log import setup_console_logger
+    setup_console_logger()
     man()

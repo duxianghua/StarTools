@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../AutoSystem/.idea/AutoSystem.iml" filepath="$PROJECT_DIR$/../AutoSystem/.idea/AutoSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hz_tools.iml" filepath="$PROJECT_DIR$/.idea/hz_tools.iml" />
     </modules>
   </component>
