@@ -87,22 +87,22 @@ def man():
     active_list = ['start', 'stop']
     service_name = argv[2]
     if active not in active_list:
-        __log.error('Unknow command: %s' % active)
+        log.error('Unknow command: %s' % active)
         sys.exit(244)
     service = BaseService(service_name)
     if active == 'start':
         if service.start():
-            __log.info('Start service %s done' % service_name)
+            log.info('Start service %s done' % service_name)
             sys.exit(0)
         else:
-            __log.info('Start service %s error' % service_name)
+            log.info('Start service %s error' % service_name)
             sys.exit(1)
     elif active == 'stop':
         if service.stop():
-            __log.info('Stop service %s done' % service_name)
+            log.info('Stop service %s done' % service_name)
             sys.exit(0)
         else:
-            __log.info('Stop service %s error' % service_name)
+            log.info('Stop service %s error' % service_name)
             sys.exit(1)
 
 if __name__ == '__main__':
