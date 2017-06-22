@@ -33,7 +33,7 @@ class BaseService:
         if self.check_service():
             status,rev = commands.getstatusoutput(cmd)
             if status == 0:
-                log.debug(rev)
+                log.debug("status code:[%s],info:%s" %(status,rev))
                 return True
             else:
                 log.error('Execute %s receive error info (%s)' %(cmd, rev))
