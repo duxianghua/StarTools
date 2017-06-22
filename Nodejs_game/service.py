@@ -95,9 +95,7 @@ def man():
         sys.exit(244)
     service = BaseService(service_name)
     if active == 'start':
-        a = service.start()
-        print a
-        if a == True:
+        if service.start() == True:
             log.info('Start service %s done' % service_name)
             sys.exit(0)
         else:
