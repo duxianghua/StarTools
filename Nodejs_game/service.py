@@ -39,7 +39,7 @@ class BaseService:
                 log.error('Execute %s receive error info (%s)' %(cmd, rev))
                 return False
         else:
-            self.create_service(start=True)
+            return self.create_service(start=True)
 
     def stop(self):
         cmd = "systemctl stop %s" % self.service_name
