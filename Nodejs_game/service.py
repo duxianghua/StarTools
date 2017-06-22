@@ -4,7 +4,11 @@ import commands
 import re
 import sys
 import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE_DIR)
 import log
+
 
 
 __log = logging.getLogger(__name__)
@@ -76,6 +80,8 @@ class BaseService:
 
 def man():
     argv = sys.argv[0:]
+    if len(argv):
+        sys.exit(244)
     active = sys.argv[1]
     active_list = ['start', 'stop']
     service_name = argv[2]
