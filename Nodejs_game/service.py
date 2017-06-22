@@ -1,24 +1,13 @@
 from jinja2 import Environment, FileSystemLoader
 import logging
-#import log
 import commands
 import re
 import sys
 import os
+import log
 
-def setup_console_logger():
-    logging.root.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(
-        '[%(levelname)-8s] %(message)s', datefmt='%H:%M:%S'
-    )
-    StreamHandler = logging.StreamHandler()
-    StreamHandler.setFormatter(formatter)
-    StreamHandler.setLevel(logging.DEBUG)
-    logging.root.addHandler(StreamHandler)
 
-setup_console_logger()
-
-local_log = logging.getLogger(__name__)
+__log = logging.getLogger(__name__)
 
 def loader_template(name, searchpath='templates', *args, **kwargs):
     env = Environment(loader=FileSystemLoader(searchpath))
@@ -43,7 +32,7 @@ class BaseService:
             if status == 0:
                 return True
             else:
-                local_log.error('Execute %s receive error info (%s)' %(cmd, rev))
+                __log.error('Execute %s receive error info (%s)' %(cmd, rev))
                 return False
         else:
             self.add_service(start=True)
@@ -57,7 +46,7 @@ class BaseService:
     def enable(self):
         cmd = "systemctl enable %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
-        local_log.info(rev)
+        __log.info(rev)
 
     def disable(self):
         cmd = "systemctl disable %s" % self.service_name
@@ -89,13 +78,25 @@ def man():
     argv = sys.argv[0:]
     active = sys.argv[1]
     active_list = ['start', 'stop']
+    service_name = argv[2]
     if active not in active_list:
+        __log.error('Unknow command: %s' % active)
         sys.exit(244)
-    service = BaseService(argv[2])
+    service = BaseService(service_name)
     if active == 'start':
-        service.start()
+        if service.start():
+            __log.info('Start service %s done' % service_name)
+            sys.exit(0)
+        else:
+            __log.info('Start service %s error' % service_name)
+            sys.exit(1)
     elif active == 'stop':
-        service.stop()
+        if service.stop():
+            __log.info('Stop service %s done' % service_name)
+            sys.exit(0)
+        else:
+            __log.info('Stop service %s error' % service_name)
+            sys.exit(1)
 
 if __name__ == '__main__':
     man()
