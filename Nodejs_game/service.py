@@ -128,14 +128,14 @@ def man():
             log.info('Stop service %s error' % service_name)
             sys.exit(1)
     elif active == 'restart':
-        if service.stop() == True:
+        if service.restart() == True:
             log.info('Restart service %s done' % service_name)
             sys.exit(0)
         else:
             log.info('Restart service %s error' % service_name)
             sys.exit(1)
     elif active == 'reload':
-        if service.stop() == True:
+        if service.reload() == True:
             log.info('Reload service %s done' % service_name)
             sys.exit(0)
         else:
