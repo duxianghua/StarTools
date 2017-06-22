@@ -33,7 +33,7 @@ class BaseService:
         if self.check_service():
             status,rev = commands.getstatusoutput(cmd)
             if status == 0:
-                log.info(rev)
+                log.debug(rev)
                 return True
             else:
                 log.error('Execute %s receive error info (%s)' %(cmd, rev))
@@ -69,7 +69,10 @@ class BaseService:
             f.write(service_connext)
         self.enable()
         if start == True:
+            log.debug('start == True')
             self.start()
+        else:
+            log.debug('not start service')
 
     def remove_service(self):
         self.disable()
