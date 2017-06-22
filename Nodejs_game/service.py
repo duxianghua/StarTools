@@ -46,6 +46,7 @@ class BaseService:
         if self.check_service():
             status, rev = commands.getstatusoutput(cmd)
             self.remove_service()
+            return True
 
     def enable(self):
         cmd = "systemctl enable %s" % self.service_name
@@ -94,14 +95,14 @@ def man():
         sys.exit(244)
     service = BaseService(service_name)
     if active == 'start':
-        if service.start():
+        if service.start() == True:
             log.info('Start service %s done' % service_name)
             sys.exit(0)
         else:
             log.info('Start service %s error' % service_name)
             sys.exit(1)
     elif active == 'stop':
-        if service.stop():
+        if service.stop() == True:
             log.info('Stop service %s done' % service_name)
             sys.exit(0)
         else:
