@@ -71,8 +71,7 @@ class BaseService:
             f.write(service_connext)
         self.enable()
         if start == True:
-            log.debug('start == True')
-            self.start()
+            return self.start()
         else:
             log.debug('not start service')
 
