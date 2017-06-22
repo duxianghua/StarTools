@@ -81,7 +81,7 @@ class BaseService:
 
 def man():
     argv = sys.argv[0:]
-    if len(argv):
+    if len(argv) <= 2:
         sys.exit(244)
     active = sys.argv[1]
     active_list = ['start', 'stop']
