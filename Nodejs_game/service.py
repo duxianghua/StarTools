@@ -62,9 +62,10 @@ class BaseService:
         return os.path.exists(servicefile)
 
     def add_service(self, start=False):
+        TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
         servicefile = os.path.join(self.service_directory, self.service_name)
         service = {'project': self.appname, 'tableid': self.tableid, 'gametype': self.gametype}
-        service_connext = loader_template(name='p2p-template.service', searchpath='templates', service=service)
+        service_connext = loader_template(name='p2p-template.service', searchpath=TEMPLATE_DIR, service=service)
         with open(servicefile, 'w') as f:
             f.write(service_connext)
         self.enable()
