@@ -39,7 +39,7 @@ class BaseService:
                 log.error('Execute %s receive error info (%s)' %(cmd, rev))
                 return False
         else:
-            self.add_service(start=True)
+            self.create_service(start=True)
 
     def stop(self):
         cmd = "systemctl stop %s" % self.service_name
@@ -56,12 +56,13 @@ class BaseService:
     def disable(self):
         cmd = "systemctl disable %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
+        log.debug(rev)
 
     def check_service(self):
         servicefile = os.path.join(self.service_directory, self.service_name)
         return os.path.exists(servicefile)
 
-    def add_service(self, start=False):
+    def create_service(self, start=False):
         TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
         servicefile = os.path.join(self.service_directory, self.service_name)
         service = {'project': self.appname, 'tableid': self.tableid, 'gametype': self.gametype}
@@ -95,7 +96,9 @@ def man():
         sys.exit(244)
     service = BaseService(service_name)
     if active == 'start':
-        if service.start() == True:
+        a = service.start()
+        print a
+        if a == True:
             log.info('Start service %s done' % service_name)
             sys.exit(0)
         else:
