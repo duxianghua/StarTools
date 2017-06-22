@@ -34,6 +34,7 @@ class BaseService:
         if self.check_service():
             status,rev = commands.getstatusoutput(cmd)
             if status == 0:
+                __log.info(rev)
                 return True
             else:
                 __log.error('Execute %s receive error info (%s)' %(cmd, rev))
