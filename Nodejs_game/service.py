@@ -112,7 +112,7 @@ def man():
     if len(argv) <= 2:
         sys.exit(244)
     active = sys.argv[1]
-    active_list = ['start', 'stop', 'restart', 'reload']
+    active_list = ['start', 'stop', 'restart', 'reload', 'kill']
     service_name = argv[2]
     if active not in active_list:
         log.error('Unknow command: %s' % active)
