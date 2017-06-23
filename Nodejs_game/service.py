@@ -58,6 +58,11 @@ class BaseService:
         status, rev = commands.getstatusoutput(cmd)
         log.debug(rev)
 
+    def other(self, args):
+        cmd = "systemctl kill %s" % args
+        status, rev = commands.getstatusoutput(cmd)
+        return status, rev
+
     def restart(self):
         cmd = "systemctl restart %s" % self.service_name
         status, rev = commands.getstatusoutput(cmd)
@@ -141,8 +146,16 @@ def man():
         else:
             log.info('Reload service %s error' % service_name)
             sys.exit(1)
+    elif active == 'kill':
+        args = argv[3:]
+        status, rev = service.other(args)
+            log.info(rev)
+            sys.exit(status)
 
-if __name__ == '__main__':
+
+
+if __name__ == '__main__':hi
+
     from log import setup_console_logger
     setup_console_logger()
     man()
