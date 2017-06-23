@@ -147,7 +147,7 @@ def man():
             log.info('Reload service %s error' % service_name)
             sys.exit(1)
     elif active == 'kill':
-        args = argv[2:]
+        args = "%s %s" %(argv[2],argv[3])
         status, rev = service.other(args)
         log.info(rev)
         sys.exit(status)
