@@ -154,8 +154,7 @@ def man():
 
 
 
-if __name__ == '__main__':hi
-
+if __name__ == '__main__':
     from log import setup_console_logger
     setup_console_logger()
     man()
