@@ -1,4 +1,4 @@
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 import logging
 import commands
 import os
@@ -53,7 +53,11 @@ class BaseService:
         FileName = "%s.%s" %(self.service_name, self.service_suffix)
         FileFullPath = os.path.join(self.service_dir, FileName)
         service = self.service_args
-        service_connext = loader_template(name=template_name, searchpath=template_dir, service=service)
+        try:
+            service_connext = loader_template(name=template_name, searchpath=template_dir, service=service)
+        except TemplateNotFound as e:
+            log.error(e)
+            log.error("Template Dir: %s" %template_dir)
         with open(FileFullPath, 'w') as f:
             f.write(service_connext)
 
