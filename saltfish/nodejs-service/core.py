@@ -3,6 +3,7 @@ import logging
 import commands
 import os
 import platform
+import re
 
 log = logging.getLogger(__name__)
 
