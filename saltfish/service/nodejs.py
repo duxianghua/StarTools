@@ -6,6 +6,7 @@ import re
 
 
 log = logging.getLogger(__name__)
+log.setLevel('DEBUG')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -54,5 +55,4 @@ if __name__ == '__main__':
     sys.path.append(BASE_DIR)
     from saltfish.log import setup_console_logger
     setup_console_logger()
-
     __man__()
