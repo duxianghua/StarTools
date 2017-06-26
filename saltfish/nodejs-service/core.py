@@ -35,7 +35,7 @@ class BaseService:
             self.service_args = r.groupdict()
             self.service_name = service.upper().split('.')[0]
             self.FileName = "%s.%s" % (self.service_name, self.service_suffix)
-            self.FileFullPath = os.path.join(self.service_dir, FileName)
+            self.FileFullPath = os.path.join(self.service_dir, self.FileName)
             return True
         else:
             return False
