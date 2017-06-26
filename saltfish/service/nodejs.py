@@ -2,18 +2,22 @@ import sys
 import os
 from core import BaseService
 import logging
+import re
 
 
 log = logging.getLogger(__name__)
 
-template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-re_str = "(?P<APP>\w+)-(?P<GameType>\w+)-\w+-(?P<TableID>\d+).*"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+RE_STR = "(?P<APP>\w+)-(?P<GameType>\w+)-\w+-(?P<TableID>\d+).*"
+
 
 def nodejs_service(*args, **kwargs):
         action = kwargs['action']
         signal = kwargs['signal']
         service = kwargs['service']
-        service = BaseService(service, re_str)
+        service_kwargs = re.match(RE_STR, service).groupdict()
+        service = BaseService(service, **service_kwargs)
         if action == 'stop':
             service.run('stop')
             service.remove_service()
