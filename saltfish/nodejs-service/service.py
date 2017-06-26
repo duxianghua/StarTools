@@ -38,7 +38,8 @@ def __man__():
                                            'stop',
                                            'restart',
                                            'reload',
-                                           'kill'])
+                                           'kill',
+                                           'status'])
     parser.add_argument('service')
     parser.add_argument('--signal', metavar='signal')
     args = parser.parse_args()
