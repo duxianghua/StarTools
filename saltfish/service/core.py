@@ -19,7 +19,7 @@ class BaseService:
     def __init__(self, service, *args, **kwargs):
         self.set_system_variable()
         self.service = service
-        self.service_file_name = "%(service).%(suffix)" % (service, self.service_suffix)
+        self.service_file_name = "%s.%s" % (service, self.service_suffix)
         self.service_args = kwargs
         self.service_file_abspath = os.path.join(self.service_dir, self.service_file_name)
 
