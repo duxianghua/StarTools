@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../AutoSystem/.idea/AutoSystem.iml" filepath="$PROJECT_DIR$/../AutoSystem/.idea/AutoSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ServiceManager/.idea/ServiceManager.iml" filepath="$PROJECT_DIR$/../ServiceManager/.idea/ServiceManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hz_tools.iml" filepath="$PROJECT_DIR$/.idea/hz_tools.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/项目代码/saltstack/.idea/saltstack.iml" filepath="$USER_HOME$/Desktop/项目代码/saltstack/.idea/saltstack.iml" />
     </modules>
   </component>
 </project>
