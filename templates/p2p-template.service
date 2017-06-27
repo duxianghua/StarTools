@@ -14,7 +14,7 @@ Group=root
 KillSignal=SIGTERM
 KillMode=process
 Restart=on-failure
-RestartSec=10
+RestartSec=5
 StartLimitInterval=20s
 StartLimitBurst=2
 Environment=NODE_ENV=staging
