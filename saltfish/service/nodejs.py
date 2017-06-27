@@ -56,6 +56,7 @@ class NodejsService(BaseService):
                 log.error('Create service: %s Failure' %self.service)
                 sys.exit(103)
         self.run('start')
+        time.sleep(2)
         if self.check('ActiveState') == 'active':
             log.debug('Start service: %s Done' % self.service)
             sys.exit(0)

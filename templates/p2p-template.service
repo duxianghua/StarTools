@@ -1,5 +1,5 @@
 [Unit]
-Description=NodeJS Game for {{ APP }} {{ GameType }} {{ TableID }}
+Description=NodeJS Game for {{ AppName }} {{ GameType }} {{ TableID }}
 Requires=network.target
 After=syslog.target network.target
 
@@ -8,17 +8,17 @@ ExecStart=/usr/bin/node /var/nodejs/p2p_game_engine/index.js
 ExecReload=/bin/kill -TERM $MAINPID
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=NodeJS P2P-{{ APP }}-{{ TableID }}
+SyslogIdentifier=NodeJS P2P-{{ AppName }}-{{ TableID }}
 User=root
 Group=root
 KillSignal=SIGTERM
 KillMode=process
 Restart=on-failure
-RestartSec=2
-StartLimitInterval=10s
+RestartSec=10
+StartLimitInterval=20s
 StartLimitBurst=2
 Environment=NODE_ENV=staging
-Environment=APP_NAME=GE_{{ APP }}
+Environment=APP_NAME=GE_{{ AppName }}
 Environment=TABLE={{ TableID }}
 Environment=NODE_PATH=/usr/lib/node_modules
 
