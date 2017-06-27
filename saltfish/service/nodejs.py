@@ -32,7 +32,7 @@ class NodejsService(BaseService):
     def stop(self):
         self.run('stop')
         if self.is_active() == 'failed':
-            status, rev = self.run('diable')
+            status, rev = self.run('disable')
             log.debug(rev)
             self.remove_service()
             if self.is_active() == 'unknown':
