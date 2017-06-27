@@ -28,7 +28,7 @@ def nodejs_service(*args, **kwargs):
             service.remove_service()
         elif action == 'start':
             if service.service_exists() == False:
-                service.create_service(template_dir, 'p2p-template.service')
+                service.create_service(TEMPLATE_DIR, 'p2p-template.service')
             service.run('start')
         elif action in ['restart', 'reload', 'status']:
             if service.service_exists():
