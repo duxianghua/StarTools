@@ -30,20 +30,21 @@ class NodejsService(BaseService):
         return rev
 
     def stop(self):
-        self.run('stop')
+        if self.is_active() == 'unkown':
+            log.info('Unkown service: %s' % self.service)
+            sys.exit(0)
         if self.is_active() == 'failed':
             status, rev = self.run('disable')
             log.debug(rev)
             self.remove_service()
             if self.is_active() == 'unknown':
-                log.debug('DELETE SERVICE FILE: %s Done' %self.service)
+                log.debug('DELETE SERVICE FILE: %s Done' % self.service)
                 sys.exit(0)
             else:
-                log.error('DELETE SERVICE FILE: %s Failure' %self.service)
+                log.error('DELETE SERVICE FILE: %s Failure' % self.service)
                 sys.exit(101)
-        else:
-            log.error('STOPING SERVICE: %s Failuer')
-            sys.exit(102)
+        self.run('stop')
+        self.stop()
 
     def start(self):
         if self.is_active() == 'unknown':
