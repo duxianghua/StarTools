@@ -30,8 +30,8 @@ class NodejsService(BaseService):
         return rev
 
     def stop(self):
-        if self.is_active() == 'unkown':
-            log.info('Unkown service: %s' % self.service)
+        if self.is_active() == 'unknown':
+            log.info('unknown service: %s' % self.service)
             sys.exit(0)
         if self.is_active() == 'failed':
             status, rev = self.run('disable')
