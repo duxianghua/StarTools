@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 import sys
 import os
-from core import BaseService
+from saltfish.service.core import BaseService
 import logging
 import re
 
