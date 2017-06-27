@@ -3,7 +3,7 @@ import logging
 def file_handler(filename):
     FileHandler = logging.FileHandler(filename=filename)
     FileHandler.format('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
-    FileHandler.setLevel(level=logging.DEBUG)
+    FileHandler.setLevel(logging.DEBUG)
     return FileHandler
 
 def console_handler():

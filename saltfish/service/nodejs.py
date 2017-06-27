@@ -10,10 +10,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 sys.path.append(BASE_DIR)
 
 from saltfish.service.core import BaseService
-import saltfish.log
+
+from saltfish.log import console_handler, file_handler
 
 log = logging.getLogger(__name__)
-#log.setLevel('DEBUG')
+log.setLevel('DEBUG')
+log.addHandler(console_handler())
+log.addHandler(file_handler())
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
