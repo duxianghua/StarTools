@@ -2,7 +2,8 @@ import logging
 
 def file_handler(filename):
     FileHandler = logging.FileHandler(filename=filename)
-    FileHandler.format('[%(levelname)-8s] %(message)s')
+    formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s', datefmt='%H:%M:%S')
+    FileHandler.setFormatter(formatter)
     FileHandler.setLevel(logging.DEBUG)
     return FileHandler
 
