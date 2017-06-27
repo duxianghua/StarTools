@@ -2,7 +2,7 @@ import logging
 
 def file_handler(filename):
     FileHandler = logging.FileHandler(filename=filename)
-    FileHandler.format('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
+    FileHandler.format('[%(levelname)-8s] %(message)s')
     FileHandler.setLevel(logging.DEBUG)
     return FileHandler
 
