@@ -16,7 +16,7 @@ from saltfish.log import console_handler, file_handler
 log = logging.getLogger(__name__)
 log.setLevel('DEBUG')
 log.addHandler(console_handler())
-log.addHandler(file_handler())
+log.addHandler(file_handler('/var/log/nodejs-service.log'))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
