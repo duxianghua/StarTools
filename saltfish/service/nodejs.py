@@ -25,21 +25,15 @@ def format_service_name(service):
     return s,p
 
 class NodejsService(BaseService):
-    def check(self, parameter):
-        status, rev = self.run('show')
-        l = rev.split('\n')
-        d = {}
-        for i in l:
-            stl = i.split('=', 1)
-            print stl
-            d[stl[0]] = stl[1]
-        return d[parameter]
+    def is_active(self):
+        status, rev = self.run('is-active')
+        return rev
 
     def stop(self):
         self.run('stop')
-        if self.check('ActiveState') != 'active':
+        if self.is_active() == 'failed':
             self.remove_service()
-            if self.check('LoadState') != 'loaded':
+            if self.is_active() == 'unknown':
                 log.debug('DELETE SERVICE FILE: %s Done' %self.service)
                 sys.exit(0)
             else:
@@ -50,15 +44,15 @@ class NodejsService(BaseService):
             sys.exit(102)
 
     def start(self):
-        if self.check('LoadState') != 'loaded':
+        if self.is_active() == 'unknown':
             if self.create_service(TEMPLATE_DIR, 'p2p-template.service'):
                 log.debug('Create service: %s Done' %self.service)
             else:
                 log.error('Create service: %s Failure' %self.service)
                 sys.exit(103)
         self.run('start')
-        time.sleep(2)
-        if self.check('ActiveState') == 'active':
+        time.sleep(1)
+        if self.is_active() == 'active':
             log.debug('Start service: %s Done' % self.service)
             sys.exit(0)
         else:
