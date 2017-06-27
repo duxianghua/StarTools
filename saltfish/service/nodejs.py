@@ -38,7 +38,7 @@ class NodejsService(BaseService):
             log.info('unknown service: %s' % self.service)
             sys.exit(0)
         self.run('stop')
-        if self.is_active() == 'failed':
+        if self.is_active() == 'failed' or self.is_active() == 'inactive':
             status, rev = self.run('disable')
             log.debug(rev)
             self.remove_service()
