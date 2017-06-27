@@ -14,9 +14,9 @@ Group=root
 KillSignal=SIGTERM
 KillMode=process
 Restart=on-failure
-RestartSec=5
+RestartSec=2
 StartLimitInterval=20s
-StartLimitBurst=2
+StartLimitBurst=1
 Environment=NODE_ENV=staging
 Environment=APP_NAME=GE_{{ AppName }}
 Environment=TABLE={{ TableID }}
