@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
 import logging
+from handler import file_handler, console_handler
 
 
-def setup_console_logger():
-    logging.root.setLevel(logging.INFO)
-    formatter = logging.Formatter(
-        '[%(levelname)-8s] %(message)s', datefmt='%H:%M:%S'
-    )
-    StreamHandler = logging.StreamHandler()
-    StreamHandler.setFormatter(formatter)
-    StreamHandler.setLevel(logging.DEBUG)
-    logging.root.addHandler(StreamHandler)
 
-def setup_file_logger():
-    pass
+def setup_logger():
+    logging.root.addHandler(console_handler)
+    logging.root.addHandler(file_handler)
+

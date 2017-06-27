@@ -10,9 +10,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 sys.path.append(BASE_DIR)
 
 from saltfish.service.core import BaseService
+import saltfish.log
 
 log = logging.getLogger(__name__)
-log.setLevel('DEBUG')
+#log.setLevel('DEBUG')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -105,6 +106,4 @@ def __man__():
     p2p_service(**args.__dict__)
 
 if __name__ == '__main__':
-    from saltfish.log import setup_console_logger
-    setup_console_logger()
     __man__()
