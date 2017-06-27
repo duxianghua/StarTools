@@ -35,7 +35,7 @@ class NodejsService(BaseService):
         return d[parameter]
 
     def stop(self):
-        self.service.run('stop')
+        self.run('stop')
         if self.check('ActiveState') != 'active':
             self.remove_service()
             if self.check('LoadState') != 'loaded':
