@@ -30,7 +30,7 @@ class NodejsService(BaseService):
         l = rev.split('\n')
         d = {}
         for i in l:
-            stl = i.split('=', maxsplit=1)
+            stl = i.split('=', 1)
             d[stl[0]] = stl[1]
         return d[parameter]
 
