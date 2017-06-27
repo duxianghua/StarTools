@@ -31,6 +31,7 @@ class NodejsService(BaseService):
         d = {}
         for i in l:
             stl = i.split('=', 1)
+            print stl
             d[stl[0]] = stl[1]
         return d[parameter]
 
