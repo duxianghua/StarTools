@@ -1,10 +1,13 @@
 from __future__ import absolute_import
-import sys
-import os
-from saltfish.service.core import BaseService
 import logging
 import re
+import os
+import sys
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(BASE_DIR)
+
+from saltfish.service.core import BaseService
 
 log = logging.getLogger(__name__)
 log.setLevel('DEBUG')
@@ -52,8 +55,8 @@ def __man__():
     nodejs_service(**args.__dict__)
 
 if __name__ == '__main__':
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    sys.path.append(BASE_DIR)
+
+
     from saltfish.log import setup_console_logger
     setup_console_logger()
     __man__()
