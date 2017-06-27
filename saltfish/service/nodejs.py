@@ -32,6 +32,8 @@ class NodejsService(BaseService):
     def stop(self):
         self.run('stop')
         if self.is_active() == 'failed':
+            status, rev = self.run('diable')
+            log.debug(rev)
             self.remove_service()
             if self.is_active() == 'unknown':
                 log.debug('DELETE SERVICE FILE: %s Done' %self.service)
@@ -46,6 +48,8 @@ class NodejsService(BaseService):
     def start(self):
         if self.is_active() == 'unknown':
             if self.create_service(TEMPLATE_DIR, 'p2p-template.service'):
+                status,rev = self.run('enable')
+                log.debug(rev)
                 log.debug('Create service: %s Done' %self.service)
             else:
                 log.error('Create service: %s Failure' %self.service)
