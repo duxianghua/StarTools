@@ -74,8 +74,8 @@ class NodejsService(BaseService):
         action = "kill --signal=%s" %signal
         self.run(action)
         log.debug('EXEC Command: %s %s' %(action, self.service))
-        for i in range(100):
-            if self.is_active() == 'failed':
+        for i in range(50):
+            if self.is_active() != 'active':
                 self.stop()
             time.sleep(0.1)
 
