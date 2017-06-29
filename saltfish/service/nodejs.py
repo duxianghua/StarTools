@@ -24,8 +24,11 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 def format_service_name(service):
     RE_STR = "(?P<AppName>\w+)-(?P<GameType>\w+)-TABLE-(?P<TableID>\d+).*"
-    p = re.match(RE_STR, service).groupdict()
-    s = service.split('.')[0]
+    try:
+        p = re.match(RE_STR, service).groupdict()
+        s = service.split('.')[0]
+    except AttributeError as e:
+        raise AttributeError('service name can not match: %s \n %s' %(service, RE_STR))
     return s,p
 
 class NodejsService(BaseService):
