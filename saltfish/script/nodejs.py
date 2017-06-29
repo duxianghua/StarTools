@@ -9,6 +9,7 @@ class SaltFishService(SaltfishJsOptionPares):
         print 'asdfsf'
         self.parse_args()
         from saltfish.service.nodejs import p2p_service
+        print self.config
         p2p_service(**self.config)
 
 if __name__ == '__main__':
