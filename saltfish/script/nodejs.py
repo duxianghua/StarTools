@@ -8,7 +8,7 @@ class SaltFishService(SaltfishJsOptionPares):
     def run(self):
         print 'asdfsf'
         self.parse_args()
-        from saltfish.service.nodejs import p2p_service
+        from saltfish.service.nodejs import *
         print self.config
         p2p_service(**self.config)
 
