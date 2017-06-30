@@ -6,12 +6,12 @@ import os
 import sys
 import time
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append(BASE_DIR)
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#sys.path.append(BASE_DIR)
 
 from saltfish.service.core import BaseService
-
 from saltfish.log import console_handler, file_handler
+from saltfish.utils.Trender import render
 
 log = logging.getLogger(__name__)
 log.setLevel('DEBUG')
@@ -19,68 +19,70 @@ log.addHandler(console_handler())
 log.addHandler(file_handler('/var/log/nodejs-service.log'))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+#TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
-def format_service_name(service):
-    RE_STR = "(?P<AppName>\w+)-(?P<GameType>\w+)-TABLE-(?P<TableID>\d+).*"
-    try:
-        p = re.match(RE_STR, service).groupdict()
-        s = service.split('.')[0]
-    except AttributeError as e:
-        raise AttributeError('service name can not match: %s \n %s' %(service, RE_STR))
-    return s,p
+ServiceConfig = {
+    'TemplateName' : 'p2p-template.service',
+    'TemplatePath' : os.path.join(BASE_DIR, 'templates')
+
+}
 
 class NodejsService(BaseService):
-    def is_active(self):
-        status, rev = self.run('is-active')
-        return rev
+    def __init__(self, service):
+        self.SName, self.SArgs = self.fromat_service(service)
+        super(NodejsService, self).__init__(self.SName)
 
-    def stop(self):
-        if self.is_active() == 'unknown':
-            log.info('unknown service: %s' % self.service)
-            sys.exit(0)
-        self.run('stop')
-        if self.is_active() == 'failed' or self.is_active() == 'inactive':
-            status, rev = self.run('disable')
+    def fromat_service(self, service):
+        RE_STR = "(?P<AppName>\w+)-(?P<GameType>\w+)-TABLE-(?P<TableID>\d+).*"
+        try:
+            _serviceArgs = re.match(RE_STR, service).groupdict()
+            _ServiceName = service.split('.')[0]
+        except AttributeError as e:
+            raise AttributeError('service name can not match: %s \n %s' %(service, RE_STR))
+        return _ServiceName.upper(),_serviceArgs
+
+    def disable(self):
+            status,rev = self.run('disable')
             log.debug(rev)
-            self.remove_service()
-            if self.is_active() == 'unknown':
-                log.debug('DELETE SERVICE FILE: %s Done' % self.service)
-                sys.exit(0)
-            else:
-                log.error('DELETE SERVICE FILE: %s Failure' % self.service)
-                sys.exit(101)
-        else:
-            log.error('STOP SERVICE FILE: %s Failure' % self.service)
 
+    def enable(self):
+        status,rev = self.run('enable')
+        log.debug(rev)
+
+    def __create_service(self):
+        service_connext = render(ServiceConfig['TemplateName'], ServiceConfig['TemplatePath'], **self.SArgs)
+        self.create_service(service_connext)
 
     def start(self):
-        if self.is_active() == 'unknown':
-            if self.create_service(TEMPLATE_DIR, 'p2p-template.service'):
-                status,rev = self.run('enable')
-                log.debug(rev)
-                log.debug('Create service: %s Done' %self.service)
-            else:
-                log.error('Create service: %s Failure' %self.service)
-                sys.exit(103)
-        self.run('start')
-        time.sleep(1)
-        if self.is_active() == 'active':
-            log.debug('Start service: %s Done' % self.service)
-            sys.exit(0)
+        if self.is_exists_service():
+            status, rev = self.run('start')
+            if status == '0':
+                self.enable()
+            if rev:
+                log.info(rev)
+            sys.exit(status)
         else:
-            log.error('Start service: %s Failure' % self.service)
-            sys.exit(104)
+            self.__create_service()
+            self.enable()
+
+    def stop(self):
+        if self.is_exists_service():
+            status, rev = self.run('stop')
+            if rev:
+                log.debug(rev)
+            self.disable()
+            sys.exit(status)
+        else:
+            log.error('service not exists: %s' % self.ServiceName)
 
     def kill(self, signal):
         action = "kill --signal=%s" %signal
-        self.run(action)
-        log.debug('EXEC Command: %s %s' %(action, self.service))
-        for i in range(50):
-            if self.is_active() != 'active':
-                self.stop()
-            time.sleep(0.1)
+        status, rev = self.run(action)
+        if rev:
+            log.debug(rev)
+        self.disable()
+        sys.exit(status)
 
     def other(self, action):
         status, rev = self.run(action)

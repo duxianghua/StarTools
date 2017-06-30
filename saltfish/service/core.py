@@ -1,27 +1,21 @@
-from jinja2 import Environment, FileSystemLoader, TemplateNotFound
+# -*- coding: utf-8 -*-
 import logging
 import commands
 import os
 import platform
-import re
+
 
 log = logging.getLogger(__name__)
 
-def loader_template(name, searchpath='templates', *args, **kwargs):
-    env = Environment(loader=FileSystemLoader(searchpath))
-    __template = env.get_template(name)
-    __str = __template.render(*args, **kwargs)
-    return __str
 
-
-
-class BaseService:
-    def __init__(self, service, *args, **kwargs):
+class BaseService(object):
+    """docstring for BaseService."""
+    def __init__(self, ServiceName):
+        super(BaseService, self).__init__()
         self.set_system_variable()
-        self.service = service
-        self.service_file_name = "%s.%s" % (service, self.service_suffix)
-        self.service_args = kwargs
-        self.service_file_abspath = os.path.join(self.service_dir, self.service_file_name)
+        self.ServiceName = ServiceName
+        self.ServicePath = os.path.join(self.service_dir, '{service}.{suffix}'.format(service=Self.ServiceName,
+                                                                                      suffix=self.service_suffix))
 
     def set_system_variable(self):
         system_version = int(platform.dist()[1].split('.')[0])
@@ -35,26 +29,25 @@ class BaseService:
             self.service_command = 'systemctl'
 
     def run(self, action):
-        cmd = "{command} {action} {service}".format(command=self.service_command, action=action, service=self.service)
+        '''执行命令'''
+        cmd = "{command} {action} {service}".format(command=self.service_command,
+                                                    action=action,
+                                                    service=self.service)
         return commands.getstatusoutput(cmd)
 
-    def service_exists(self):
-        return os.path.exists(self.service_file_abspath )
+    def is_exists_service(self):
+        return os.path.exists(self.ServicePath)
 
-    def create_service(self, t_dir, t_name):
-        if self.service_exists():
-            _msg = 'Create service failure: %s exits.' %self.service
-            raise IOError(msg)
-        try:
-            s_connext = loader_template(name=t_name, searchpath=t_dir, **self.service_args)
-        except TemplateNotFound as e:
-            log.error(e)
-            log.error("Template Dir: %s" %template_dir)
-            return False
-        with open(self.service_file_abspath , 'w') as f:
-            f.write(s_connext)
+    def create_service(self, service_connext):
+        if is_exists_service:
+            raise IOError('service file already exists: %s' %(self.ServiceName))
+
+        with open(self.ServicePath, 'w') as f:
+            f.write(service_connext)
         return True
 
     def remove_service(self):
-        if os.path.exists(self.service_file_abspath  ):
-            os.remove(self.service_file_abspath )
+        if is_exists_service:
+            os.remove(self.ServicePath)
+        else:
+            raise IOError('service file not exists: %s' % (self.ServiceName))
