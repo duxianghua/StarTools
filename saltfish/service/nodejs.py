@@ -93,8 +93,7 @@ def p2p_service(*args, **kwargs):
         action = kwargs['action']
         signal = kwargs['signal']
         service = kwargs['service']
-        SName, Sparameter = format_service_name(service)
-        service = NodejsService(SName, **Sparameter)
+        service = NodejsService(service)
         if action == 'start':
             service.start()
         elif action == 'stop':
