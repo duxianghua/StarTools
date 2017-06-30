@@ -48,7 +48,7 @@ class NodejsService(BaseService):
 
     def enable(self):
         status,rev = self.run('enable')
-        log.debug(rev)
+        log.error(rev)
 
     def __create_service(self):
         service_connext = render(ServiceConfig['TemplateName'], ServiceConfig['TemplatePath'], **self.SArgs)
@@ -61,7 +61,7 @@ class NodejsService(BaseService):
                 self.enable()
                 print 'asdf'
             if rev:
-                log.info(rev)
+                log.error(rev)
             sys.exit(status)
         else:
             self.__create_service()
@@ -91,7 +91,6 @@ class NodejsService(BaseService):
         sys.exit(status)
 
 def p2p_service(*args, **kwargs):
-        log.error('asdfasdf')
         action = kwargs['action']
         signal = kwargs['signal']
         service = kwargs['service']
