@@ -14,7 +14,7 @@ class BaseService(object):
         super(BaseService, self).__init__()
         self.set_system_variable()
         self.ServiceName = ServiceName
-        self.ServicePath = os.path.join(self.service_dir, '{service}.{suffix}'.format(service=Self.ServiceName,
+        self.ServicePath = os.path.join(self.service_dir, '{service}.{suffix}'.format(service=self.ServiceName,
                                                                                       suffix=self.service_suffix))
 
     def set_system_variable(self):
