@@ -59,6 +59,7 @@ class NodejsService(BaseService):
             status, rev = self.run('start')
             if status == '0':
                 self.enable()
+                print 'asdf'
             if rev:
                 log.info(rev)
             sys.exit(status)
