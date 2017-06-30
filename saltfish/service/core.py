@@ -39,7 +39,7 @@ class BaseService(object):
         return os.path.exists(self.ServicePath)
 
     def create_service(self, service_connext):
-        if is_exists_service:
+        if self.is_exists_service():
             raise IOError('service file already exists: %s' %(self.ServiceName))
 
         with open(self.ServicePath, 'w') as f:
@@ -47,7 +47,7 @@ class BaseService(object):
         return True
 
     def remove_service(self):
-        if is_exists_service:
+        if self.is_exists_service():
             os.remove(self.ServicePath)
         else:
             raise IOError('service file not exists: %s' % (self.ServiceName))
