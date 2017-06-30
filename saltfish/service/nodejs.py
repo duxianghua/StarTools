@@ -64,7 +64,7 @@ class NodejsService(BaseService):
             sys.exit(status)
         else:
             self.__create_service()
-            self.enable()
+            self.start()
 
     def stop(self):
         if self.is_exists_service():
