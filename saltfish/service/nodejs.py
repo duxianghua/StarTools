@@ -91,6 +91,7 @@ class NodejsService(BaseService):
         sys.exit(status)
 
 def p2p_service(*args, **kwargs):
+        log.error('asdfasdf')
         action = kwargs['action']
         signal = kwargs['signal']
         service = kwargs['service']
