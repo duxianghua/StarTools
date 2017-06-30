@@ -48,7 +48,7 @@ class NodejsService(BaseService):
 
     def enable(self):
         status,rev = self.run('enable')
-        log.error(rev)
+        log.debug(rev)
 
     def __create_service(self):
         service_connext = render(ServiceConfig['TemplateName'], ServiceConfig['TemplatePath'], **self.SArgs)
@@ -58,6 +58,7 @@ class NodejsService(BaseService):
         if self.is_exists_service():
             status, rev = self.run('start')
             if status == 0:
+                log.info('service starting done')
                 self.enable()
             if rev:
                 log.error(rev)
