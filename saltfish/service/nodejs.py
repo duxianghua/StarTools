@@ -57,9 +57,8 @@ class NodejsService(BaseService):
     def start(self):
         if self.is_exists_service():
             status, rev = self.run('start')
-            if status == '0':
+            if status == 0:
                 self.enable()
-                print 'asdf'
             if rev:
                 log.error(rev)
             sys.exit(status)
