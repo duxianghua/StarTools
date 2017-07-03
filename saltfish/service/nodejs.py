@@ -80,8 +80,7 @@ def p2p_service(*args, **kwargs):
         if action == 'start':
             status,rev = service.run('is-active')
             if rev == 'unknown':
-                connext = service.render(s)
-                service.create_service(s)
+                service.create_service(service.render(s))
             status,rev = service.run('start')
             log.info(rev)
             status, rev = service.run('disable')
