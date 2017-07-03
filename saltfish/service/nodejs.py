@@ -75,6 +75,9 @@ def p2p_service(*args, **kwargs):
         s = fromat_service(service)
         service = NodejsService(AppName=s['AppName'], GameType=s['GameType'], TableID=s['TableID'])
         if action == 'start':
+            status,rev = service.run('is-active')
+            if rev == 'unknown':
+                service.create_service(s)
             status,rev = service.run('start')
             log.info(rev)
             status, rev = service.run('disable')
