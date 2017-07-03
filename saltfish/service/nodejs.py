@@ -35,7 +35,7 @@ class NodejsService(BaseService):
         self.service_name = '{GameType}-{AppName}-{TableID}'.format(GameType=self.GameType,
                                                                     AppName=self.AppName,
                                                                     TableID=self.TableID)
-        super(NodejsService, self).__init__(self.service_name)
+        super(NodejsService, self).__init__(self.service_name, **self.config)
 
     def create(self, template, template_dir, *args, **kwargs):
         connext = self.render(template_dir, template, *args, **kwargs)
