@@ -18,7 +18,7 @@ class BaseService(object):
         self.service_cmd = kwargs['service_cmd']
         self.service_suffix = kwargs['service_suffix']
         self.service_name = service_name
-        self.service_file = '{service_name}.{service_suffix}'.format(self.service_name, self.service_suffix)
+        self.service_file = '{name}.{suffix}'.format(name=self.service_name, suffix=self.service_suffix)
         self.service_file_path = os.path.join(self.service_dir, self.service_file)
 
     def run(self, action):
