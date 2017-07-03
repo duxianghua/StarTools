@@ -24,7 +24,7 @@ class BaseService(object):
     def run(self, action):
         '''执行命令'''
         cmd = "{command} {action} {service}".format(command=self.service_cmd, action=action,
-                                                    self.service_name)
+                                                    service=self.service_name)
         return commands.getstatusoutput(cmd)
 
     def is_exists_service(self):
