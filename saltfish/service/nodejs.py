@@ -83,7 +83,7 @@ def p2p_service(*args, **kwargs):
                 service.create_service(service.js_render(s))
             status,rev = service.run('start')
             log.info(rev)
-            status, rev = service.run('disable')
+            status, rev = service.run('enable')
             log.info(rev)
             sys.exit(status)
         elif action == 'stop':
