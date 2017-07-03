@@ -4,10 +4,7 @@ import logging
 import re
 import os
 import sys
-import time
-
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#sys.path.append(BASE_DIR)
+import ConfigParser
 
 from saltfish.service.core import BaseService
 from saltfish.log import console_handler, file_handler
@@ -19,99 +16,81 @@ log.addHandler(console_handler())
 log.addHandler(file_handler('/var/log/nodejs-service.log'))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
-
-ServiceConfig = {
-    'TemplateName' : 'p2p-template.service',
-    'TemplatePath' : os.path.join(BASE_DIR, 'templates')
-
-}
 
 class NodejsService(BaseService):
-    def __init__(self, service):
-        self.SName, self.SArgs = self.fromat_service(service)
-        super(NodejsService, self).__init__(self.SName)
+    config = {'service_dir':'/usr/lib/systemd/system',
+              'service_cmd':'systemctl',
+              'service_suffix':'service',
+              'template':'p2p-template.service',
+              'template_dir': os.path.join(BASE_DIR, 'templates')
+              }
+    def __init__(self, AppName=None,
+                 GameType=None,
+                 TableID=None):
+        self.AppName = AppName
+        self.GameType = GameType
+        self.TableID = TableID
+        self.set_config()
+        self.service_name = '{GameType}-{AppName}-{TableID}'.format(GameType, AppName, TableID)
+        super(NodejsService, self).__init__(self.service_name)
 
-    def fromat_service(self, service):
-        RE_STR = "(?P<AppName>\w+)-(?P<GameType>\w+)-TABLE-(?P<TableID>\d+).*"
+    def create(self, template, template_dir, *args, **kwargs):
+        connext = self.render(template_dir, template, *args, **kwargs)
+        self.create_service(connext)
+
+    def set_config(self):
+        c = self.configparser()
+        for keyname in self.config.keys():
+            try:
+                values = c.get(self.AppName, keyname)
+                self.config[keyname] = values
+            except ConfigParser.NoSectionError, ConfigParser.NoOptionError:
+                pass
+
+    def configparser(self, file=None):
+        if not file:
+            file = '../config/nodejs_service.conf'
+
+        c = ConfigParser.SafeConfigParser()
+        c.read(file)
+        return c
+
+
+def fromat_service(service):
+        re_str = "(?P<AppName>\w+)-(?P<GameType>\w+)-TABLE-(?P<TableID>\d+).*"
+        name = service.split('.')[0].upper()
         try:
-            _serviceArgs = re.match(RE_STR, service).groupdict()
-            _ServiceName = service.split('.')[0]
+            s = re.match(re_str, name).groupdict()
         except AttributeError as e:
-            raise AttributeError('service name can not match: %s \n %s' %(service, RE_STR))
-        return _ServiceName.upper(),_serviceArgs
-
-    def disable(self):
-            status,rev = self.run('disable')
-            log.debug(rev)
-
-    def enable(self):
-        status,rev = self.run('enable')
-        log.debug(rev)
-
-    def __create_service(self):
-        service_connext = render(ServiceConfig['TemplateName'], ServiceConfig['TemplatePath'], **self.SArgs)
-        self.create_service(service_connext)
-
-    def start(self):
-        if self.is_exists_service():
-            status, rev = self.run('start')
-            if status == 0:
-                log.info('service starting done')
-                self.enable()
-            if rev:
-                log.error(rev)
-            sys.exit(status)
-        else:
-            self.__create_service()
-            self.start()
-
-    def stop(self):
-        if self.is_exists_service():
-            status, rev = self.run('stop')
-            if rev:
-                log.debug(rev)
-            self.disable()
-            sys.exit(status)
-        else:
-            log.error('service not exists: %s' % self.ServiceName)
-
-    def kill(self, signal):
-        action = "kill --signal=%s" %signal
-        status, rev = self.run(action)
-        if rev:
-            log.debug(rev)
-        self.disable()
-        sys.exit(status)
-
-    def other(self, action):
-        status, rev = self.run(action)
-        log.info(rev)
-        sys.exit(status)
+            raise AttributeError('service name can not match: %s \n %s' %(service, re_str))
+        return s
 
 def p2p_service(*args, **kwargs):
         action = kwargs['action']
         signal = kwargs['signal']
         service = kwargs['service']
-        service = NodejsService(service)
+        s = fromat_service(service)
+        service = NodejsService(AppName=s['AppName'], GameType=s['GameType'], TableID=s['TableID'])
         if action == 'start':
-            service.start()
+            status,rev = service.run('start')
+            log.info(rev)
+            status, rev = service.run('disable')
+            log.info(rev)
+            sys.exit(status)
         elif action == 'stop':
-            service.stop()
+            status,rev = service.run('stop')
+            log.info(rev)
+            status, rev = service.run('disable')
+            log.info(rev)
+            sys.exit(status)
         elif action == 'kill':
-            service.kill(signal=signal)
+            action = '{action} --signal={signal}'.format(action=action, signal=signal)
+            status, rev = service.run(action)
+            log.info(rev)
+            status, rev = service.run('disable')
+            sys.exit(status)
         else:
-            service.other(action=action)
-
-def __man__():
-    import argparse
-    parser = argparse.ArgumentParser(description='Test Process.')
-    parser.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status'])
-    parser.add_argument('service')
-    parser.add_argument('--signal', metavar='signal')
-    args = parser.parse_args()
-    p2p_service(**args.__dict__)
-
-if __name__ == '__main__':
-    __man__()
+            status, rev = service.run(action)
+            log.info(rev)
+            sys.exit(status)

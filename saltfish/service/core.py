@@ -1,53 +1,55 @@
 # -*- coding: utf-8 -*-
+
+# Import python libs
 import logging
 import commands
 import os
-import platform
-
+from jinja2 import Environment, FileSystemLoader
 
 log = logging.getLogger(__name__)
 
+# Import SaltFish libs
+from saltfish.utils.exceptions import ServiceError
 
 class BaseService(object):
     """docstring for BaseService."""
-    def __init__(self, ServiceName):
-        super(BaseService, self).__init__()
-        self.set_system_variable()
-        self.ServiceName = ServiceName
-        self.ServicePath = os.path.join(self.service_dir, '{service}.{suffix}'.format(service=self.ServiceName,
-                                                                                      suffix=self.service_suffix))
-
-    def set_system_variable(self):
-        system_version = int(platform.dist()[1].split('.')[0])
-        if int(system_version) < 7:
-            self.service_dir = '/etc/init'
-            self.service_suffix = 'conf'
-            self.service_command = 'initctl'
-        else:
-            self.service_dir = '/etc/systemd/system'
-            self.service_suffix = 'service'
-            self.service_command = 'systemctl'
+    def __init__(self, service_name, *args, **kwargs):
+        self.service_dir = kwargs['service_dir']
+        self.service_cmd = kwargs['service_cmd']
+        self.service_suffix = kwargs['service_suffix']
+        self.service_name = service_name
+        self.service_file = '{service_name}.{service_suffix}'.format(self.service_name, self.service_suffix)
+        self.service_file_path = os.path.join(self.service_dir, self.service_file)
 
     def run(self, action):
         '''执行命令'''
-        cmd = "{command} {action} {service}".format(command=self.service_command,
-                                                    action=action,
-                                                    service=self.ServiceName)
+        cmd = "{command} {action} {service}".format(command=self.service_cmd, action=action,
+                                                    self.service_name)
         return commands.getstatusoutput(cmd)
 
     def is_exists_service(self):
-        return os.path.exists(self.ServicePath)
+        return os.path.exists(self.service_file_path)
 
-    def create_service(self, service_connext):
-        if self.is_exists_service():
-            raise IOError('service file already exists: %s' %(self.ServiceName))
+    def render(self, template_dir, template, *args, **kwargs):
+        env = Environment(loader=FileSystemLoader(template_dir))
+        t = env.get_template(template)
+        connext = t.render(*args, **kwargs)
+        return connext
 
-        with open(self.ServicePath, 'w') as f:
-            f.write(service_connext)
+    def create_service(self, connext, cover=False):
+        if cover:
+            if self.is_exists_service():
+                msg = 'service file already exists for %s.' %self.service_file_path
+                raise ServiceError(msg)
+
+        with open(self.service_file_path, 'w') as f:
+            f.write(connext)
         return True
 
     def remove_service(self):
         if self.is_exists_service():
-            os.remove(self.ServicePath)
+            os.remove(self.service_file_path)
+            return True
         else:
-            raise IOError('service file not exists: %s' % (self.ServiceName))
+            msg = 'service file not exists: %s' %(self.service_file_path)
+            raise ServiceError(msg)
