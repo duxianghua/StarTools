@@ -58,8 +58,8 @@ class NodejsService(BaseService):
         c.read(file)
         return c
 
-    def __render(self, *args, **kwargs):
-        return self.render(self.config['template_dir'], self.config['template'], *args, **kwargs)
+    def render(self, *args, **kwargs):
+        return self.BaseService.render(self.config['template_dir'], self.config['template'], *args, **kwargs)
 
 
 def fromat_service(service):
@@ -80,7 +80,7 @@ def p2p_service(*args, **kwargs):
         if action == 'start':
             status,rev = service.run('is-active')
             if rev == 'unknown':
-                connext = service.__render(s)
+                connext = service.render(s)
                 service.create_service(s)
             status,rev = service.run('start')
             log.info(rev)
