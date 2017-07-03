@@ -32,7 +32,9 @@ class NodejsService(BaseService):
         self.GameType = GameType
         self.TableID = TableID
         self.set_config()
-        self.service_name = '{GameType}-{AppName}-{TableID}'.format(GameType, AppName, TableID)
+        self.service_name = '{GameType}-{AppName}-{TableID}'.format(GameType=self.GameType,
+                                                                    AppName=self.AppName,
+                                                                    TableID=self.TableID)
         super(NodejsService, self).__init__(self.service_name)
 
     def create(self, template, template_dir, *args, **kwargs):
