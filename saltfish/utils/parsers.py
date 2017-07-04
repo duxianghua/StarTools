@@ -45,6 +45,6 @@ class OptionParser(argparse.ArgumentParser):
 class SaltfishJsOptionPares(OptionParser):
     description = 'P2P游戏启动脚本管理接口'
     def _set_arguments(self):
-        self.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status'])
+        self.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create'])
         self.add_argument('service')
         self.add_argument('--signal', metavar='signal')

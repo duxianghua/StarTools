@@ -99,7 +99,7 @@ def p2p_service(*args, **kwargs):
             status, rev = service.run('disable')
             log.debug(rev)
             sys.exit(status)
-        elif action == 'add':
+        elif action == 'create':
             if service.create_service(service.js_render(s)):
                 log.info('add service %s done.' %service )
             else:
