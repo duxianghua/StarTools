@@ -12,7 +12,7 @@ class Game(GameOptionPares):
 def game_service():
     c = GameOptionPares()
     c.parse_args()
-    GameServiceCLI(c.config)
+    GameServiceCLI(**c.config)
 
 if __name__ == '__main__':
     game_service()
