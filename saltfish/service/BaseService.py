@@ -47,7 +47,7 @@ class Service(object):
                 values = c.get(Section, keyname)
                 self.config[keyname] = values
             except (NoSectionError,NoOptionError) as e:
-                raise e
+                raise NoSectionError(e)
 
     def is_exists(self):
         return os.path.exists(self.config['service_file'])
