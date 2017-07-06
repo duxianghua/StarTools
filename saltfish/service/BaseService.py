@@ -40,14 +40,16 @@ class Service(object):
         c.read(file)
         return c
 
-    def set_config(self, Section, ConfingFile=None):
+    def set_config(self, section, ConfingFile=None):
         c = self.configparser(ConfingFile)
+        if section not in c.sections():
+            raise ServiceError('未在配置文件中定义的服务类型')
         for keyname in self.config.keys():
             try:
                 values = c.get(Section, keyname)
                 self.config[keyname] = values
             except (NoSectionError,NoOptionError) as e:
-                raise NoSectionError(e)
+                pass
 
     def is_exists(self):
         return os.path.exists(self.config['service_file'])
