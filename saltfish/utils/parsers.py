@@ -45,6 +45,22 @@ class OptionParser(argparse.ArgumentParser):
 class SaltfishJsOptionPares(OptionParser):
     description = 'P2P游戏启动脚本管理接口'
     def _set_arguments(self):
-        self.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create'])
+        self.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create'], metavar='action')
         self.add_argument('service')
         self.add_argument('--signal', metavar='signal')
+
+class NodejsServiceOptionPares(OptionParser):
+    def _set_arguments(self):
+        self.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create'],metavar='action')
+        self.add_argument('service',metavar='action')
+        #self.add_argument('TableID')
+        #self.add_argument('-P','-project')
+
+if __name__ == '__main__':
+    from saltfish.service.BaseService import Service
+    a=NodejsServiceOptionPares()
+    a.parse_args(['create','bigtwo-p2p-table-12'])
+    print a.config
+    #s = Service('p2p',**a.config)
+    #print s.render()
+    a.print_help()

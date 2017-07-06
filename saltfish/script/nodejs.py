@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
-import sys
-import os
 
-from saltfish.utils.parsers import SaltfishJsOptionPares
+from saltfish.service.NodejsService import GameServiceCLI, GameOptionPares
+import script
 
-class SaltFishService(SaltfishJsOptionPares):
+class Game(GameOptionPares):
     def run(self):
-        self.parse_args()
-        from saltfish.service.nodejs import p2p_service
-        p2p_service(**self.config)
+        self.parse_args(['create','bigtwo-p2p-table-12'])
+        print self.config
+        GameServiceCLI(**self.config)
+
+def game_service():
+    c = GameOptionPares()
+    c.parse_args()
+    GameServiceCLI(c.config)
 
 if __name__ == '__main__':
-    SaltFishService().run()
+    game_service()

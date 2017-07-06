@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from saltfish.script.nodejs import SaltFishService
+from saltfish.script.nodejs import SaltFishService,Game
 
 if __name__ == '__main__':
-    SaltFishService().run()
+    Game().run()

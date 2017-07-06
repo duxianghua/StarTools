@@ -1,2 +1,1 @@
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from nodejs import game_service
