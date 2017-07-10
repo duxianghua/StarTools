@@ -9,7 +9,8 @@ from jinja2 import Environment, FileSystemLoader
 
 from saltfish.utils.exceptions import ServiceError
 
-BASE_DIR='../../'
+
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class Service(object):
     config = {'service_dir'     :   '/usr/lib/systemd/system',
@@ -35,7 +36,8 @@ class Service(object):
 
     def configparser(self, file=None):
         if not file:
-            file = '../config/nodejs_service.conf'
+            file = os.path.join(BASE_DIR, '/config/nodejs_service.conf')
+            print file
         c = ConfigParser.SafeConfigParser()
         c.read(file)
         return c
@@ -43,6 +45,7 @@ class Service(object):
     def set_config(self, section, ConfingFile=None):
         c = self.configparser(ConfingFile)
         if section not in c.sections():
+            print c.sections()
             raise ServiceError('未在配置文件中定义的服务类型[%s]' %section)
         for keyname in self.config.keys():
             try:
