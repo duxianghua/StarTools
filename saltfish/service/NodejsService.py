@@ -38,7 +38,10 @@ def write_log(status=0, msg=None):
 def GameServiceCLI(*args, **kwargs):
     cli_parameter = kwargs
     service_args = analyze_service_name(cli_parameter['service'])
-    s = Service(service_args['GameType'],**service_args)
+    try:
+        s = Service(service_args['GameType'],**service_args)
+    except ServiceError, e:
+        write_log(1, e)
     if cli_parameter['action'] in ['start', 'stop', 'restart', 'reload', 'status']:
         try:
             status, rev = s._exec(cli_parameter['action'])
