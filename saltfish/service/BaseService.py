@@ -22,12 +22,10 @@ class Service(object):
               'template_dir'    :   os.path.join(BASE_DIR, 'templates')
               }
     def __init__(self, ServiceType, ConfingFile=None, *args, **kwargs):
-        print self.BASE_DIR
         self.set_config(ServiceType, ConfingFile)
         if self.config['name_rule']:
             try:
                 self.config['service_name'] = self.config['name_rule'].format(*args, **kwargs)
-                print "name:" + self.config['service_name']
             except KeyError as e:
                 raise KeyError('Missing parameters: %s' %e)
         else:
@@ -39,7 +37,6 @@ class Service(object):
     def configparser(self, file=None):
         if not file:
             file = os.path.join(self.BASE_DIR, 'saltfish/config/nodejs_service.conf')
-            print file
         c = ConfigParser.SafeConfigParser()
         c.read(file)
         return c
@@ -47,7 +44,6 @@ class Service(object):
     def set_config(self, section, ConfingFile=None):
         c = self.configparser(ConfingFile)
         if section not in c.sections():
-            print c.sections()
             raise ServiceError('未在配置文件中定义的服务类型[%s]' %section)
         for keyname in self.config.keys():
             try:
@@ -88,7 +84,3 @@ class Service(object):
                                                     action=action,
                                                     service=self.config['service_name'])
         return commands.getstatusoutput(cmd)
-
-if __name__ == '__main__':
-    a = Service('p2p',AppName='bitwo', GameType='xxxx', TableID='12')
-    print a.render()

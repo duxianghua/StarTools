@@ -31,9 +31,11 @@ def analyze_service_name(service):
 
 def write_log(status=0, msg=None):
     if status == 0:
-        log.debug(msg)
+        if msg:
+            log.debug(msg)
     else:
-        log.error(msg)
+        if msg:
+            log.error(msg)
     sys.exit(status)
 
 def GameServiceCLI(*args, **kwargs):
