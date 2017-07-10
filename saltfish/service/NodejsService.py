@@ -38,6 +38,7 @@ def write_log(status=0, msg=None):
 
 def GameServiceCLI(*args, **kwargs):
     cli_parameter = kwargs
+    print cli_parameter
     service_args = analyze_service_name(cli_parameter['service'])
     try:
         s = Service(service_args['GameType'],**service_args)

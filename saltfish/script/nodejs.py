@@ -13,10 +13,10 @@ def game_service():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     print BASE_DIR
     c = GameOptionPares()
-    c.parse_args(['start', 'bigtwo-P2P-table-123.service'])
+    c.parse_args()
     GameServiceCLI(**c.config)
 
 if __name__ == '__main__':
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     print BASE_DIR
-    #game_service()
+    game_service()
