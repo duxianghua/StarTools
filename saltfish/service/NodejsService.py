@@ -37,7 +37,6 @@ def write_log(status=0, msg=None):
 
 def GameServiceCLI(*args, **kwargs):
     cli_parameter = kwargs
-    print kwargs
     service_args = analyze_service_name(cli_parameter['service'])
     s = Service(service_args['GameType'],**service_args)
     if cli_parameter['action'] in ['start', 'stop', 'restart', 'reload', 'status']:
@@ -46,7 +45,6 @@ def GameServiceCLI(*args, **kwargs):
             write_log(status, rev)
         except ServiceError as e:
             write_log(1, e)
-            print 'asdf'
     elif cli_parameter['action'] == 'kill':
         action = '{action} --signal={signal}'.format(action=cli_parameter['action'],
                                                      signal=cli_parameter['signal'])
