@@ -38,13 +38,16 @@ def write_log(status=0, msg=None):
 
 def GameServiceCLI(*args, **kwargs):
     cli_parameter = kwargs
-    print cli_parameter
     service_args = analyze_service_name(cli_parameter['service'])
     try:
         s = Service(service_args['GameType'],**service_args)
     except ServiceError, e:
         write_log(1, e)
     if cli_parameter['action'] == 'start':
+        if s.is_exists() != True:
+            connext = s.render(service_args)
+            if s.create(connext) != True:
+                write_log(3, 'create service [%s] failure' %s.config['service_name'])
         s1, rev1 = s._exec('start')
         if s1 == 0:
             s2, rev2 = s._exec('enable')
@@ -67,10 +70,10 @@ def GameServiceCLI(*args, **kwargs):
         connext = s.render(service_args)
         if s.create(connext, cover=cli_parameter['cover']):
             status = 0
-            msg = 'create service [%s] success.'
+            msg = 'create service [%s] success.' %s.config['service_name']
         else:
             status = 1
-            msg = 'create service [%s] failure.'
+            msg = 'create service [%s] failure.' %s.config['service_name']
         write_log(status, msg)
     else:
         try:
