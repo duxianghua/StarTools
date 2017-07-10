@@ -3,6 +3,7 @@
 ''' Import Sys lib '''
 from __future__ import absolute_import
 import os
+import sys
 import ConfigParser
 from ConfigParser import NoSectionError, NoOptionError
 from jinja2 import Environment, FileSystemLoader
@@ -10,9 +11,8 @@ from jinja2 import Environment, FileSystemLoader
 from saltfish.utils.exceptions import ServiceError
 
 
-BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 class Service(object):
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config = {'service_dir'     :   '/usr/lib/systemd/system',
               'service_cmd'     :   'systemctl',
               'service_suffix'  :   'service',
@@ -36,7 +36,7 @@ class Service(object):
 
     def configparser(self, file=None):
         if not file:
-            file = os.path.join(BASE_DIR, '/config/nodejs_service.conf')
+            file = os.path.join(self.BASE_DIR, 'config/nodejs_service.conf')
             print file
         c = ConfigParser.SafeConfigParser()
         c.read(file)

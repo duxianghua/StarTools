@@ -9,6 +9,7 @@
     <orderEntry type="module" module-name="ServiceManager" />
     <orderEntry type="module" module-name="webhook" />
     <orderEntry type="module" module-name="fabric" />
+    <orderEntry type="module" module-name="CCC" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />

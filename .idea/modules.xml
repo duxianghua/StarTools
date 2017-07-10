@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../AutoSystem/.idea/AutoSystem.iml" filepath="$PROJECT_DIR$/../AutoSystem/.idea/AutoSystem.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/项目代码/CCC/.idea/CCC.iml" filepath="$USER_HOME$/Desktop/项目代码/CCC/.idea/CCC.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ServiceManager/.idea/ServiceManager.iml" filepath="$PROJECT_DIR$/../ServiceManager/.idea/ServiceManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/../fabric/.idea/fabric.iml" filepath="$PROJECT_DIR$/../fabric/.idea/fabric.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hz_tools.iml" filepath="$PROJECT_DIR$/.idea/hz_tools.iml" />

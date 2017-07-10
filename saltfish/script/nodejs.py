@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import os
 
 from saltfish.service.NodejsService import GameServiceCLI, GameOptionPares
-import script
 
 class Game(GameOptionPares):
     def run(self):
@@ -10,9 +10,13 @@ class Game(GameOptionPares):
         GameServiceCLI(**self.config)
 
 def game_service():
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    print BASE_DIR
     c = GameOptionPares()
-    c.parse_args()
+    c.parse_args(['start', 'bigtwo-P2P-table-123.service'])
     GameServiceCLI(**c.config)
 
 if __name__ == '__main__':
-    game_service()
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    print BASE_DIR
+    #game_service()
