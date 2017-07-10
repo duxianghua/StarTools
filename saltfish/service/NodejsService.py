@@ -24,7 +24,7 @@ def analyze_service_name(service):
     try:
         s = re.match(re_str, name).groupdict()
     except AttributeError as e:
-        log.error('service name can not match: %s \n %s' % (service, re_str))
+        log.error('service name can not match: %s, Name rule [%s]' % (service, re_str))
         sys.exit(245)
     return s
 
