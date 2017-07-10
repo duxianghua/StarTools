@@ -13,15 +13,16 @@ from saltfish.utils.exceptions import ServiceError
 
 
 class Service(object):
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     config = {'service_dir'     :   '/usr/lib/systemd/system',
               'service_cmd'     :   'systemctl',
               'service_suffix'  :   'service',
               'template'        :   'p2p-template.service',
               'name_rule'       :   None,
-              'template_dir'    :   '../../templates'
+              'template_dir'    :   os.path.join(BASE_DIR, 'templates')
               }
     def __init__(self, ServiceType, ConfingFile=None, *args, **kwargs):
+        print self.BASE_DIR
         self.set_config(ServiceType, ConfingFile)
         if self.config['name_rule']:
             try:
@@ -37,7 +38,7 @@ class Service(object):
 
     def configparser(self, file=None):
         if not file:
-            file = os.path.join(self.BASE_DIR, 'config/nodejs_service.conf')
+            file = os.path.join(self.BASE_DIR, 'saltfish/config/nodejs_service.conf')
             print file
         c = ConfigParser.SafeConfigParser()
         c.read(file)
