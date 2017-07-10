@@ -5,6 +5,7 @@ import logging
 
 from saltfish.service.BaseService import Service
 from saltfish.utils.parsers import OptionParser
+from saltfish.utils.exceptions import ServiceError
 
 
 log = logging.getLogger('__name__')
@@ -40,8 +41,12 @@ def GameServiceCLI(*args, **kwargs):
     service_args = analyze_service_name(cli_parameter['service'])
     s = Service(service_args['GameType'],**service_args)
     if cli_parameter['action'] in ['start', 'stop', 'restart', 'reload', 'status']:
-        status, rev = s._exec(cli_parameter['action'])
-        write_log(status, rev)
+        try:
+            status, rev = s._exec(cli_parameter['action'])
+            write_log(status, rev)
+        except ServiceError as e:
+            write_log(1, e)
+            print 'asdf'
     elif cli_parameter['action'] == 'kill':
         action = '{action} --signal={signal}'.format(action=cli_parameter['action'],
                                                      signal=cli_parameter['signal'])
