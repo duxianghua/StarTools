@@ -15,7 +15,7 @@ class GameOptionPares(OptionParser):
     choices_list = ['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create']
     def _set_arguments(self):
         self.add_argument('action', choices=self.choices_list, metavar='action', help=str(self.choices_list))
-        self.add_argument('service', help='Service Name')
+        self.add_argument('service', help='Service Name', metavar='ServiceName')
         self.add_argument('--signal', help='Which signal to send')
         self.add_argument('--cover', action='store_true', help='当服务存在时是否覆盖')
 
@@ -67,6 +67,9 @@ def GameServiceCLI(*args, **kwargs):
         action = '{action} --signal={signal}'.format(action=cli_parameter['action'],
                                                      signal=cli_parameter['signal'])
         status, rev = s._exec(action)
+        if status == 0:
+            status1, rev1 = s._exec('disable')
+            log.info(rev1)
         write_log(status, rev)
     elif cli_parameter['action'] == 'create':
         connext = s.render(service_args)
