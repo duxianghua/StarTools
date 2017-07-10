@@ -43,7 +43,7 @@ def GameServiceCLI(*args, **kwargs):
         try:
             status, rev = s._exec(cli_parameter['action'])
             write_log(status, rev)
-        except ServiceError as e:
+        except Exception as e:
             write_log(1, e)
     elif cli_parameter['action'] == 'kill':
         action = '{action} --signal={signal}'.format(action=cli_parameter['action'],
