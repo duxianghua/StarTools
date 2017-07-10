@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 class GameOptionPares(OptionParser):
     choices_list = ['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create']
     def _set_arguments(self):
-        self.add_argument('action', choices=self.choices_list, metavar='action', help=str(self.choices_list))
+        self.add_argument('action', choices=self.choices_list, metavar='ACTION', help=str(self.choices_list))
         self.add_argument('service', help='Service Name', metavar='ServiceName')
         self.add_argument('--signal', help='Which signal to send')
         self.add_argument('--cover', action='store_true', help='当服务存在时是否覆盖')
