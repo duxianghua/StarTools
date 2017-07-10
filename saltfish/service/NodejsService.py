@@ -44,16 +44,16 @@ def GameServiceCLI(*args, **kwargs):
     except ServiceError, e:
         write_log(1, e)
     if cli_parameter['action'] == 'start':
-        s1, rev1 = s._exec(cli_parameter['start'])
+        s1, rev1 = s._exec('start')
         if s1 == 0:
-            s2, rev2 = s._exec(cli_parameter['enable'])
+            s2, rev2 = s._exec('enable')
             log.debug(rev2)
         write_log(s1, rev1)
 
     elif cli_parameter['action'] == 'stop':
-        s1, rev1 = s._exec(cli_parameter['stop'])
+        s1, rev1 = s._exec('stop')
         if s1 == 0:
-            s2, rev2 = s._exec(cli_parameter['disable'])
+            s2, rev2 = s._exec('disable')
             log.debug(rev2)
         write_log(s1, rev1)
 
