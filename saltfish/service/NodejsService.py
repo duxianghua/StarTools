@@ -6,9 +6,7 @@ import logging
 from saltfish.service.BaseService import Service
 from saltfish.utils.parsers import OptionParser
 from saltfish.utils.exceptions import ServiceError
-from saltfish.log.setup import setup_logger
 
-setup_logger()
 log = logging.getLogger(__name__)
 
 class GameOptionPares(OptionParser):
