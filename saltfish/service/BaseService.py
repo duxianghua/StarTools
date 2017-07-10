@@ -7,6 +7,7 @@ import sys
 import ConfigParser
 from ConfigParser import NoSectionError, NoOptionError
 from jinja2 import Environment, FileSystemLoader
+import commands
 
 from saltfish.utils.exceptions import ServiceError
 
