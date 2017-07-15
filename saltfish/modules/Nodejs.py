@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 import ConfigParser
 import os
+import sys
 
 from saltfish.utils.parsers import OptionParser
 from saltfish.modules import service
 from saltfish.utils.exceptions import ServiceError
 
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(BASE_DIR)
 class CreateNodejsServiceOptionPares(OptionParser):
     description = 'Create Nodejs Service'
     usage = 'aaa'
@@ -43,7 +45,7 @@ class CreateService(object):
 
     def set_options(self, section, file=None):
         if not file:
-            file = '/Users/admin/PycharmProjects/hz_tools/saltfish/config/service.conf'
+            file = 'saltfish/config/service.conf'
         c = ConfigParser.ConfigParser()
         c.read(file)
         if c.has_section(section):
