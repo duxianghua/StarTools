@@ -2,14 +2,10 @@
 import subprocess
 import os
 import sys
-import time
-import signal
-import httplib
 import httplib2
-import random
+
 
 from apiclient.discovery import build
-from apiclient.errors import HttpError
 from apiclient.http import MediaFileUpload
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.file import Storage

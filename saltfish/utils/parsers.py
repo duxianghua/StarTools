@@ -21,8 +21,8 @@ class OptionParser(argparse.ArgumentParser):
         if self.epilog:
             kwargs.setdefault('epilog', self.epilog)
 
-
         argparse.ArgumentParser.__init__(self, *args, **kwargs)
+
         self._set_arguments()
 
         if self.optionals_title:
@@ -30,6 +30,7 @@ class OptionParser(argparse.ArgumentParser):
 
         if self.positionals_title:
             self._positionals.title = self.positionals_title
+
 
     def conflict_handler(self, *args, **kwargs):
         pass
@@ -55,12 +56,3 @@ class NodejsServiceOptionPares(OptionParser):
         self.add_argument('service',metavar='action')
         #self.add_argument('TableID')
         #self.add_argument('-P','-project')
-
-if __name__ == '__main__':
-    from saltfish.service.BaseService import Service
-    a=NodejsServiceOptionPares()
-    a.parse_args(['create','bigtwo-p2p-table-12'])
-    print a.config
-    #s = Service('p2p',**a.config)
-    #print s.render()
-    a.print_help()
