@@ -10,9 +10,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ServiceManager/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../ServiceManager/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ServiceManager/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../ServiceManager/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/config/staging/service.conf" afterPath="$PROJECT_DIR$/saltfish/config/staging/service.conf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/modules/Nodejs.py" afterPath="$PROJECT_DIR$/saltfish/modules/Nodejs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/service/service.py" afterPath="$PROJECT_DIR$/saltfish/service/service.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -57,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Nodejs.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Nodejs.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="85" column="12" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="12" />
+            <state relative-caret-position="429">
+              <caret line="105" column="66" lean-forward="false" selection-start-line="105" selection-start-column="66" selection-end-line="105" selection-end-column="66" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
               </folding>
@@ -69,7 +67,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="service.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="service.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saltfish/service/service.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="444">
@@ -262,8 +260,8 @@
         <option value="$PROJECT_DIR$/saltfish/config/service.conf" />
         <option value="$PROJECT_DIR$/saltfish/config/production/service.conf" />
         <option value="$PROJECT_DIR$/saltfish/config/staging/service.conf" />
-        <option value="$PROJECT_DIR$/saltfish/modules/Nodejs.py" />
         <option value="$PROJECT_DIR$/saltfish/service/service.py" />
+        <option value="$PROJECT_DIR$/saltfish/modules/Nodejs.py" />
       </list>
     </option>
   </component>
@@ -768,13 +766,6 @@
       <option name="presentableId" value="Default" />
       <updated>1497343969027</updated>
     </task>
-    <task id="LOCAL-00088" summary="v0.1.2">
-      <created>1499056489417</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1499056489417</updated>
-    </task>
     <task id="LOCAL-00089" summary="v0.1.2">
       <created>1499056850323</created>
       <option name="number" value="00089" />
@@ -1111,7 +1102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500210380460</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="v0.1.2">
+      <created>1500213889019</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1500213889019</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1157,7 +1155,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20283689" sideWeight="0.49427754" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907802" sideWeight="0.49570817" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553648" sideWeight="0.49288255" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553648" sideWeight="0.49288255" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32907802" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1620,22 +1618,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="85" column="12" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="12" />
-          <folding>
-            <element signature="e#24#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/saltfish/service/service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="444">
           <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
             <element signature="e#48#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="105" column="66" lean-forward="false" selection-start-line="105" selection-start-column="66" selection-end-line="105" selection-end-column="66" />
+          <folding>
+            <element signature="e#24#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
