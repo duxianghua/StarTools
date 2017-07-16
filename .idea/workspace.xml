@@ -58,14 +58,10 @@
       <file leaf-file-name="Nodejs.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="101" column="48" lean-forward="false" selection-start-line="101" selection-start-column="48" selection-end-line="101" selection-end-column="48" />
+            <state relative-caret-position="297">
+              <caret line="100" column="77" lean-forward="false" selection-start-line="100" selection-start-column="77" selection-end-line="100" selection-end-column="77" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
-                <marker date="1500218163000" expanded="true" signature="1349:4089" ph="..." />
-                <marker date="1500218163000" expanded="true" signature="3818:4089" ph="..." />
-                <marker date="1500218163000" expanded="true" signature="3857:4089" ph="..." />
-                <marker date="1500218163000" expanded="true" signature="4038:4089" ph="..." />
               </folding>
             </state>
           </provider>
@@ -812,13 +808,6 @@
       <option name="presentableId" value="Default" />
       <updated>1497343969027</updated>
     </task>
-    <task id="LOCAL-00097" summary="v0.1.2">
-      <created>1499149287111</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1499149287111</updated>
-    </task>
     <task id="LOCAL-00098" summary="v0.1.2">
       <created>1499308855747</created>
       <option name="number" value="00098" />
@@ -1155,7 +1144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500218128837</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="v0.1.2">
+      <created>1500218175606</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1500218175606</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1676,14 +1672,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="101" column="48" lean-forward="false" selection-start-line="101" selection-start-column="48" selection-end-line="101" selection-end-column="48" />
+        <state relative-caret-position="297">
+          <caret line="100" column="77" lean-forward="false" selection-start-line="100" selection-start-column="77" selection-end-line="100" selection-end-column="77" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
-            <marker date="1500218163000" expanded="true" signature="1349:4089" ph="..." />
-            <marker date="1500218163000" expanded="true" signature="3818:4089" ph="..." />
-            <marker date="1500218163000" expanded="true" signature="3857:4089" ph="..." />
-            <marker date="1500218163000" expanded="true" signature="4038:4089" ph="..." />
           </folding>
         </state>
       </provider>
