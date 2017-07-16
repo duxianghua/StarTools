@@ -96,8 +96,10 @@ class CreateService(object):
         for i in self.generate_args():
             #print i
             connext = service.render(**i)
-            service.write(connext=connext, file=i['file'])
-
+            try:
+                service.write(connext=connext, file=i['file'])
+            except ServiceError as e:
+                sys.stderr.write(e)
 
 class TaskMQ(CreateService):
     options = {
