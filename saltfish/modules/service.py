@@ -17,7 +17,7 @@ def render(template, template_dir, *args, **kwargs):
 def write(connext, file, cover=False):
     if not cover:
         if os.path.exists(file):
-            msg = 'file already exists for %s.\n' % file
+            msg = 'file already exists for %s.' % file
             raise ServiceError(msg)
 
     with open(file, 'w') as f:
