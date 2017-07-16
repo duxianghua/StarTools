@@ -11,7 +11,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ServiceManager/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../ServiceManager/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/modules/Nodejs.py" afterPath="$PROJECT_DIR$/saltfish/modules/Nodejs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/modules/service.py" afterPath="$PROJECT_DIR$/saltfish/modules/service.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
-              <caret line="99" column="67" lean-forward="true" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
+              <caret line="99" column="47" lean-forward="false" selection-start-line="99" selection-start-column="47" selection-end-line="99" selection-end-column="47" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
               </folding>
@@ -809,13 +808,6 @@
       <option name="presentableId" value="Default" />
       <updated>1497343969027</updated>
     </task>
-    <task id="LOCAL-00100" summary="v0.1.2">
-      <created>1499309665379</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1499309665379</updated>
-    </task>
     <task id="LOCAL-00101" summary="v0.1.2">
       <created>1499309718434</created>
       <option name="number" value="00101" />
@@ -1152,7 +1144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500218358075</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="v0.1.2">
+      <created>1500218537119</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1500218537119</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1674,7 +1673,7 @@
     <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="99" column="67" lean-forward="true" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
+          <caret line="99" column="47" lean-forward="false" selection-start-line="99" selection-start-column="47" selection-end-line="99" selection-end-column="47" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
           </folding>
