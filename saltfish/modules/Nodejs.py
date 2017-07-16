@@ -99,7 +99,7 @@ class CreateService(object):
             try:
                 service.write(connext=connext, file=i['file'])
             except ServiceError as e:
-                sys.stderr.write(e)
+                sys.stderr.write(e.message + '\n')
 
 class TaskMQ(CreateService):
     options = {
