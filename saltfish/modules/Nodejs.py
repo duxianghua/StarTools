@@ -97,8 +97,8 @@ class CreateService(object):
             #print i
             connext = service.render(**i)
             try:
-                service.write(connext=connext, file=i['file'])
-                sys.stdout.write('service file create success. [%s]' %i['name'])
+                service.write(connext=connext, file=i['file'], **i)
+                sys.stdout.write('service "%s" create success.\n' %i['name'])
             except ServiceError as e:
                 sys.stderr.write(e.message + '\n')
 

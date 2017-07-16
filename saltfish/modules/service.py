@@ -14,7 +14,7 @@ def render(template, template_dir, *args, **kwargs):
     connext = t.render(*args, **kwargs)
     return connext
 
-def write(connext, file, cover=False):
+def write(connext, file, cover=False, *args, **kwargs):
     if not cover:
         if os.path.exists(file):
             msg = 'file already exists for %s.' % file

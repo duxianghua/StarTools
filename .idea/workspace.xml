@@ -47,8 +47,8 @@
       <file leaf-file-name="service.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saltfish/modules/service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+            <state relative-caret-position="240">
+              <caret line="16" column="53" lean-forward="false" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
               <folding>
                 <element signature="e#41#50#0" expanded="true" />
               </folding>
@@ -59,8 +59,8 @@
       <file leaf-file-name="Nodejs.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="126" column="13" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+            <state relative-caret-position="252">
+              <caret line="99" column="67" lean-forward="true" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
               </folding>
@@ -809,13 +809,6 @@
       <option name="presentableId" value="Default" />
       <updated>1497343969027</updated>
     </task>
-    <task id="LOCAL-00099" summary="v0.1.2">
-      <created>1499309090314</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1499309090314</updated>
-    </task>
     <task id="LOCAL-00100" summary="v0.1.2">
       <created>1499309665379</created>
       <option name="number" value="00100" />
@@ -1152,7 +1145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500218291087</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="v0.1.2">
+      <created>1500218358075</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1500218358075</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1663,8 +1663,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/saltfish/modules/service.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        <state relative-caret-position="240">
+          <caret line="16" column="53" lean-forward="false" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
           <folding>
             <element signature="e#41#50#0" expanded="true" />
           </folding>
@@ -1673,8 +1673,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="126" column="13" lean-forward="false" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+        <state relative-caret-position="252">
+          <caret line="99" column="67" lean-forward="true" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
           </folding>
