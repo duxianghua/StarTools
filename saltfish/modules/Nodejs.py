@@ -120,5 +120,5 @@ def nodejs(*args, **kwargs):
 
 a=CreateNodejsServiceOptionPares()
 #'--project p2p  --appname bigtwo --startid 10 --endid 10'.split()
-a.parse_args('--project p2p  --appname bigtwo'.split())
+a.parse_args('--project p2p  --appname bigtwo --startid 1 --endid 10'.split())
 nodejs(**a.config)
