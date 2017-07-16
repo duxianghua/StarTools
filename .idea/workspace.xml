@@ -11,6 +11,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ServiceManager/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../ServiceManager/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/modules/Nodejs.py" afterPath="$PROJECT_DIR$/saltfish/modules/Nodejs.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/saltfish/modules/service.py" afterPath="$PROJECT_DIR$/saltfish/modules/service.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="service.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="service.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/saltfish/modules/service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
               <folding>
                 <element signature="e#41#50#0" expanded="true" />
               </folding>
@@ -55,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Nodejs.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Nodejs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
+            <state relative-caret-position="177">
+              <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
               </folding>
@@ -260,8 +261,8 @@
         <option value="$PROJECT_DIR$/saltfish/config/production/service.conf" />
         <option value="$PROJECT_DIR$/saltfish/config/staging/service.conf" />
         <option value="$PROJECT_DIR$/saltfish/service/service.py" />
-        <option value="$PROJECT_DIR$/saltfish/modules/service.py" />
         <option value="$PROJECT_DIR$/saltfish/modules/Nodejs.py" />
+        <option value="$PROJECT_DIR$/saltfish/modules/service.py" />
       </list>
     </option>
   </component>
@@ -808,13 +809,6 @@
       <option name="presentableId" value="Default" />
       <updated>1497343969027</updated>
     </task>
-    <task id="LOCAL-00093" summary="v0.1.2">
-      <created>1499057325071</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1499057325071</updated>
-    </task>
     <task id="LOCAL-00094" summary="v0.1.2">
       <created>1499057395345</created>
       <option name="number" value="00094" />
@@ -1151,7 +1145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500217795891</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="v0.1.2">
+      <created>1500217837120</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1500217837120</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1660,22 +1661,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saltfish/modules/service.py">
+    <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="177">
+          <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
           <folding>
-            <element signature="e#41#50#0" expanded="true" />
+            <element signature="e#24#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saltfish/modules/Nodejs.py">
+    <entry file="file://$PROJECT_DIR$/saltfish/modules/service.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
+        <state relative-caret-position="285">
+          <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
           <folding>
-            <element signature="e#24#43#0" expanded="true" />
+            <element signature="e#41#50#0" expanded="true" />
           </folding>
         </state>
       </provider>

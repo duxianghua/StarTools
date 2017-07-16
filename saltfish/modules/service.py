@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Import Sys lib
 import os
+import sys
 import commands
 from jinja2 import Environment, FileSystemLoader
 
@@ -16,8 +17,8 @@ def render(template, template_dir, *args, **kwargs):
 def write(connext, file, cover=False):
     if not cover:
         if os.path.exists(file):
-            msg = 'file already exists for %s.' % file
-            raise ServiceError(msg)
+            msg = 'file already exists for %s.\n' % file
+            sys.stderr.write(msg)
 
     with open(file, 'w') as f:
         f.write(connext)

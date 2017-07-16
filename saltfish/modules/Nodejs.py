@@ -98,6 +98,7 @@ class CreateService(object):
             connext = service.render(**i)
             service.write(connext=connext, file=i['file'])
 
+
 class TaskMQ(CreateService):
     options = {
         'template': None,
