@@ -18,11 +18,10 @@ def write(connext, file, cover=False):
         if os.path.exists(file):
             msg = 'file already exists for %s.' % file
             raise ServiceError(msg)
-
-    with open(file, 'w') as f:
-        f.write(connext)
-    return True
-
+    try:
+        with open(file, 'w') as f:
+            f.write(connext)
+        return True
 #def create(*args, **kwargs):
 
 

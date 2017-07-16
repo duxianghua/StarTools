@@ -36,10 +36,22 @@ class CreateService(object):
         'suffix': None
     }
     def __init__(self, project, appname, startid=0, endid=0, interval=0, file=None, cover=False, *args, **kwargs):
-        self.set_options(project.upper(), file)
+        if isinstance(project, str):
+            project = project.upper()
+        else:
+            raise ServiceError('The project name is [None]')
+
+        if isinstance(appname, str):
+            appname = appname.upper()
+        else:
+            raise ServiceError('The app name is not a string type')
+
+        self.set_options(project, file)
+
         id_list = [int(startid), int(endid) + 1, int(interval)]
-        self.options['ProjectName'] = project.upper()
-        self.options['AppName'] = appname.upper()
+
+        self.options['ProjectName'] = project
+        self.options['AppName'] = appname
         self.options['id_list'] = id_list
         self.options['cover'] = cover
         self.options['template_dir'] = os.path.join(BASE_DIR, self.options['template_dir'])
@@ -50,9 +62,7 @@ class CreateService(object):
             file = os.path.join(BASE_DIR, 'saltfish/config/staging/service.conf')
         c = ConfigParser.ConfigParser()
         l = c.read(file)
-        print l
         #os.path.isfile('saltfish/config/service.conf')
-        print c.sections()
         if c.has_section(section):
             for i in self.options:
                 self.options[i] = c.get(section, i)
@@ -62,12 +72,15 @@ class CreateService(object):
             raise ServiceError(msg)
 
     def generate_name(self, **kwargs):
-        name = self.options['name_rule'].format(**kwargs)
-        return name
+        try:
+            name = self.options['name_rule'].format(**kwargs)
+            return name
+        except KeyError as e:
+            raise ServiceError('name rule: "%s". return error: %s' %(self.options['name_rule'], e.message))
 
     def generate_args(self):
         _kwargs = {}
-        if self.options['id_list'] != [0, 1, 0]:
+        if self.options['id_list'] != [0, 1, 1]:
             for i in range(*self.options['id_list']):
                 _kwargs['name'] = self.generate_name(ID=i, **self.options)
                 _kwargs['ID'] = i
@@ -81,9 +94,9 @@ class CreateService(object):
 
     def run(self):
         for i in self.generate_args():
-            print i['template_dir']
-            connext = service.render(**i)
-            service.write(connext=connext, file=i['file'])
+            print i
+            #connext = service.render(**i)
+            #service.write(connext=connext, file=i['file'])
 
 class TaskMQ(CreateService):
     options = {
@@ -99,10 +112,13 @@ class TaskMQ(CreateService):
 
 
 def nodejs(*args, **kwargs):
-    s = CreateService(*args, **kwargs)
-    s.run()
+    try:
+        s = CreateService(*args, **kwargs)
+        s.run()
+    except ServiceError as e:
+        sys.stderr.write(e.message + '\n')
 
 a=CreateNodejsServiceOptionPares()
 #'--project p2p  --appname bigtwo --startid 10 --endid 10'.split()
-a.parse_args()
+a.parse_args('--project p2p  --appname bigtwo'.split())
 nodejs(**a.config)
