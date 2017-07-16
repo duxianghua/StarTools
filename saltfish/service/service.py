@@ -89,17 +89,3 @@ class BaseService(object):
                                                     action=action,
                                                     service=service)
         return commands.getstatusoutput(cmd)
-
-def
-
-def render():
-    pass
-
-def create():
-    pass
-
-def remove():
-    pass
-
-def run():
-    pass

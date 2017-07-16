@@ -42,11 +42,12 @@ class CreateService(object):
         self.options['AppName'] = appname.upper()
         self.options['id_list'] = id_list
         self.options['cover'] = cover
+        self.options['template_dir'] = os.path.join(BASE_DIR, self.options['template_dir'])
         super(CreateService, self).__init__()
 
     def set_options(self, section, file=None):
         if not file:
-            file = 'saltfish/config/staging/service.conf'
+            file = os.path.join(BASE_DIR, 'saltfish/config/staging/service.conf')
         c = ConfigParser.ConfigParser()
         l = c.read(file)
         print l
@@ -80,7 +81,7 @@ class CreateService(object):
 
     def run(self):
         for i in self.generate_args():
-            print i['file']
+            print i['template_dir']
             connext = service.render(**i)
             service.write(connext=connext, file=i['file'])
 
