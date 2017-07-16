@@ -94,9 +94,9 @@ class CreateService(object):
 
     def run(self):
         for i in self.generate_args():
-            print i
-            #connext = service.render(**i)
-            #service.write(connext=connext, file=i['file'])
+            #print i
+            connext = service.render(**i)
+            service.write(connext=connext, file=i['file'])
 
 class TaskMQ(CreateService):
     options = {
