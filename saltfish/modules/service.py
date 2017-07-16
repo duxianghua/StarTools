@@ -18,7 +18,7 @@ def write(connext, file, cover=False):
     if not cover:
         if os.path.exists(file):
             msg = 'file already exists for %s.\n' % file
-            sys.stderr.write(msg)
+            raise ServiceError(msg)
 
     with open(file, 'w') as f:
         f.write(connext)
