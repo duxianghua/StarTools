@@ -3,12 +3,13 @@ import ConfigParser
 import os
 import sys
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(BASE_DIR)
+
 from saltfish.utils.parsers import OptionParser
 from saltfish.modules import service
 from saltfish.utils.exceptions import ServiceError
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append(BASE_DIR)
 class CreateNodejsServiceOptionPares(OptionParser):
     description = 'Create Nodejs Service'
     usage = 'aaa'
@@ -45,9 +46,12 @@ class CreateService(object):
 
     def set_options(self, section, file=None):
         if not file:
-            file = 'saltfish/config/service.conf'
+            file = 'saltfish/config/staging/service.conf'
         c = ConfigParser.ConfigParser()
-        c.read(file)
+        l = c.read(file)
+        print l
+        #os.path.isfile('saltfish/config/service.conf')
+        print c.sections()
         if c.has_section(section):
             for i in self.options:
                 self.options[i] = c.get(section, i)
