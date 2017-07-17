@@ -18,6 +18,5 @@ class CreateService(ServiceOptionPares):
 
 
 if __name__ == '__main__':
-    print 'test branch'
     c=CreateService()
     c.run()
