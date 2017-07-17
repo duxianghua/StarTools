@@ -53,10 +53,10 @@ def run(name, action):
     return commands.getstatusoutput(' '.join(ret))
 
 def start(name):
-    return  run(name, 'start')
+    return run(name, 'start')
 
 def stop(name):
-    return  run(name, 'stop')
+    return run(name, 'stop')
 
 def get_all():
     pass

@@ -58,7 +58,7 @@ class GameCLI(GameOptionPares):
     def start(self):
         if not os.path.exists(self.config['file']):
             self.create()
-        print self.config['name']
+        print self.config
         service.run(self.config['name'], 'enable')
         retcode,rev = service.start(self.config['name'])
         self.write_log(retcode, rev)
