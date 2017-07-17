@@ -93,13 +93,12 @@ class CreateService(object):
 
     def run(self):
         for i in self.generate_args():
-            print i
-            #connext = service.render(**i)
-            #try:
-            #    service.write(connext=connext, **i)
-            #    sys.stdout.write('service "%s" create success.\n' %i['name'])
-            #except ServiceError as e:
-            #    sys.stderr.write(e.message + '\n')
+            connext = service.render(**i)
+            try:
+                service.write(connext=connext, **i)
+                sys.stdout.write('service "%s" create success.\n' %i['name'])
+            except ServiceError as e:
+                sys.stderr.write(e.message + '\n')
 
 class TaskMQ(CreateService):
     options = {
