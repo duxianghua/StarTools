@@ -56,7 +56,7 @@ class GameCLI(GameOptionPares):
         nodejs(**self.config)
 
     def start(self):
-        if not os.path.exists(self.config['file']):
+        if os.path.exists(self.config['file']):
             self.create()
         service.run(self.config['name'], 'enable')
         retcode,rev = service.start(self.config['name'])
