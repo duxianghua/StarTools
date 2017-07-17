@@ -48,9 +48,8 @@ def run(name, action):
         ret.append('systemctl')
     else:
         ret.append('initctl')
-    ret.extend(action)
-    ret.extend(name)
-    print ' '.join(ret)
+    ret.extend([action])
+    ret.extend([name])
     return commands.getstatusoutput(' '.join(ret))
 
 def start(name):
