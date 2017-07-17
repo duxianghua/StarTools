@@ -4,7 +4,7 @@ Requires=network.target
 After=syslog.target network.target
 
 [Service]
-ExecStart=/usr/bin/node /var/nodejs/p2p_game_engine/index.js
+ExecStart=/usr/bin/node {{ exec_file }}
 ExecReload=/bin/kill -TERM $MAINPID
 StandardOutput=syslog
 StandardError=syslog
@@ -17,7 +17,7 @@ Restart=on-failure
 RestartSec=2
 StartLimitInterval=20s
 StartLimitBurst=1
-Environment=NODE_ENV=staging
+Environment=NODE_ENV={{ env }}
 Environment=APP_NAME=GE_{{ AppName }}
 Environment=TABLE={{ ID }}
 Environment=NODE_PATH=/usr/lib/node_modules
