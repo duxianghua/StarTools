@@ -66,7 +66,6 @@ class CreateService(object):
         if c.has_section(section):
             for i in c.options(section):
                 self.options[i] = c.get(section, i)
-                print c.options(section)
         else:
             msg = '在配置文件中没有找到项目[%s]' % section
             raise ServiceError(msg)
