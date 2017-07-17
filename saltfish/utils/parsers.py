@@ -9,7 +9,7 @@ class OptionParser(argparse.ArgumentParser):
     positionals_title = None
 
     epilog = ('You can find additional help about %(prog)s issuing "man %(prog)s" '
-              'or on https://github.com/duxianghua/hz_tools')
+              'or on https://github.com/duxianghua/StarTools')
 
     def __init__(self, *args, **kwargs):
         if self.usage:

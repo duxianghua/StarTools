@@ -10,16 +10,16 @@ from saltfish.utils.parsers import OptionParser
 from saltfish.modules import service
 from saltfish.utils.exceptions import ServiceError
 
-class CreateNodejsServiceOptionPares(OptionParser):
+class ServiceOptionPares(OptionParser):
     description = 'Create Nodejs Service'
-    usage = 'aaa'
     description = 'bbb'
     optionals_title = ''
     positionals_title = 'ddd'
     def _set_arguments(self):
         self.description = '%s --project p2p  --appname bigtwo --startid 10 --endid 10 --interval 2' % self.prog
-        self.add_argument('--project', metavar='ProjectName', action='store')
-        self.add_argument('--appname', metavar='AppName')
+        self.add_argument('--project', metavar='ProjectName', action='store', required=True)
+        self.add_argument('--appname', metavar='AppName', required=True)
+        self.add_argument('--env', metavar='Environment', choices=['staging', 'production'],  required=True)
         self.add_argument('--startid', metavar='Number', type=int, default=0, help='specify service ID,default is 0')
         self.add_argument('--endid', metavar='Number', type=int, default=0, help='specify service ID,default is 0')
         self.add_argument('--interval', metavar='Number', type=int, default=1, help='specify service ID interval,default is 1')
@@ -58,8 +58,8 @@ class CreateService(object):
         super(CreateService, self).__init__()
 
     def set_options(self, section, file=None):
-        if not file:
-            file = os.path.join(BASE_DIR, 'saltfish/config/staging/service.conf')
+        #if not file:
+        #   file = os.path.join(BASE_DIR, 'saltfish/config/staging/service.conf')
         c = ConfigParser.ConfigParser()
         l = c.read(file)
         #os.path.isfile('saltfish/config/service.conf')
@@ -122,7 +122,7 @@ def nodejs(*args, **kwargs):
     except ServiceError as e:
         sys.stderr.write(e.message + '\n')
 
-a=CreateNodejsServiceOptionPares()
+#a=ServiceOptionPares()
 #'--project p2p  --appname bigtwo --startid 10 --endid 10'.split()
-a.parse_args()
-nodejs(**a.config)
+#a.parse_args()
+#nodejs(**a.config)
