@@ -17,6 +17,7 @@ class ServiceOptionPares(OptionParser):
     positionals_title = 'ddd'
     def _set_arguments(self):
         self.description = '%s --project p2p  --appname bigtwo --startid 10 --endid 10 --interval 2' % self.prog
+
         self.add_argument('--project', metavar='ProjectName', action='store', required=True)
         self.add_argument('--appname', metavar='AppName', required=True)
         self.add_argument('--env', metavar='Environment', choices=['staging', 'production'],  required=True)
