@@ -15,10 +15,10 @@ KillSignal=SIGTERM
 KillMode=process
 Restart=on-failure
 RestartSec=2
-StartLimitInterval=20s
-StartLimitBurst=1
-Environment=NODE_ENV=staging
-Environment=APP_NAME=GE_{{ AppName }}
+StartLimitInterval=10s
+StartLimitBurst=2
+Environment=NODE_ENV=production
+Environment=APP_NAME=ge_{{ AppName|lower }}
 Environment=TABLE={{ TableID }}
 Environment=NODE_PATH=/usr/lib/node_modules
 
