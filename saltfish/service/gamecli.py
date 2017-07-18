@@ -19,7 +19,8 @@ class GameOptionPares(OptionParser):
 
 class GameCLI(GameOptionPares):
     def run(self):
-        self.parse_args('start BIGTWO-P2P-TABLE-12.service'.split())
+        #self.parse_args('start BIGTWO-P2P-TABLE-12.service'.split())
+        self.parse_args()
         self.analyze_service_name()
         self.config['file'] = os.path.join(BASE_DIR, 'config/staging/service.conf')
         self.config['env'] = 'staging'
@@ -53,6 +54,7 @@ class GameCLI(GameOptionPares):
             log.error(msg)
             sys.exit(status)
     def create(self):
+        print self.config
         nodejs(**self.config)
 
     def start(self):
