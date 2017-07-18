@@ -93,7 +93,7 @@ class CreateService(object):
 
     def run(self):
         for i in self.generate_args():
-            connext = service.render(**i)
+            connext = service.render(**i) + '\n'
             try:
                 service.write(connext=connext, **i)
                 sys.stdout.write('service "%s" create success.\n' %i['name'])
