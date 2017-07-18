@@ -108,6 +108,7 @@ class TaskMQ(CreateService):
         game_list = []
         with open(self.options['gamecode', 'r']) as f:
             game_list.append(f.readline())
+        print game_list
         if self.options['id_list'] != [0, 1, 1]:
             for game in game_list:
                 for i in self.options['id_list']:
