@@ -103,17 +103,33 @@ class CreateService(object):
 
 
 class TaskMQ(CreateService):
-    options = {
-        'template': None,
-        'template_dir': None,
-        'name_rule': None,
-        'service_dir': None,
-        'suffix': None,
-        'project_path': None
-    }
     def generate_args(self):
-        s_list_file = os.path.join()
+        _kwargs = {}
+        game_list = []
+        with open(self.options['gamecode', 'r']) as f:
+            game_list.append(f.readline())
+        if self.options['id_list'] != [0, 1, 1]:
+            for game in game_list:
+                for i in self.options['id_list']:
+                    _kwargs['name'] = self.generate_name(GameName=game, **self.options)
+                    _kwargs['ID'] = i
+                    _kwargs['file'] = os.path.join(self.options['service_dir'],
+                                                   _kwargs['name'] + '.' + self.options['suffix'])
+                    yield dict(_kwargs, **self.options)
+        else:
+            for game in game_list:
+                _kwargs['name'] = self.generate_name(GameName=game, **self.options)
+                _kwargs['file'] = os.path.join(self.options['service_dir'],
+                                               _kwargs['name'] + '.' + self.options['suffix'])
+                yield dict(_kwargs, **self.options)
 
+
+def taskmq(*args, **kwargs):
+    try:
+        s = TaskMQ(*args, **kwargs)
+        s.run()
+    except ServiceError as e:
+        sys.stderr.write(e.message + '\n')
 
 def nodejs(*args, **kwargs):
     try:
