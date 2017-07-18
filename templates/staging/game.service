@@ -17,8 +17,8 @@ Restart=on-failure
 RestartSec=2
 StartLimitInterval=20s
 StartLimitBurst=1
-Environment=NODE_ENV=staging
-Environment=APP_NAME=GE_{{ AppName }}
+Environment=NODE_ENV={{ env }}
+Environment=APP_NAME=GE_{{ AppName|lower }}
 Environment=TABLE={{ ID }}
 Environment=NODE_PATH=/usr/lib/node_modules
 

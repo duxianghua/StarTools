@@ -12,9 +12,7 @@ from saltfish.utils.exceptions import ServiceError
 
 class ServiceOptionPares(OptionParser):
     description = 'Create Nodejs Service'
-    description = 'bbb'
     optionals_title = ''
-    positionals_title = 'ddd'
     def _set_arguments(self):
         self.description = '%s --project p2p  --appname bigtwo --startid 10 --endid 10 --interval 2' % self.prog
 
@@ -55,6 +53,7 @@ class CreateService(object):
         self.options['AppName'] = appname
         self.options['id_list'] = id_list
         self.options['cover'] = cover
+        self.options['env'] = kwargs['env']
         self.options['template_dir'] = os.path.join(BASE_DIR, self.options['template_dir'])
         super(CreateService, self).__init__()
 
@@ -65,9 +64,8 @@ class CreateService(object):
         l = c.read(file)
         #os.path.isfile('saltfish/config/service.conf')
         if c.has_section(section):
-            for i in self.options:
+            for i in c.options(section):
                 self.options[i] = c.get(section, i)
-
         else:
             msg = '在配置文件中没有找到项目[%s]' % section
             raise ServiceError(msg)
@@ -95,7 +93,7 @@ class CreateService(object):
 
     def run(self):
         for i in self.generate_args():
-            #print i
+            print i
             connext = service.render(**i)
             try:
                 service.write(connext=connext, **i)
