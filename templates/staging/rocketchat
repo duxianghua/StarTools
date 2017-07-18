@@ -18,9 +18,12 @@ RestartSec=2
 StartLimitInterval=20s
 StartLimitBurst=3
 Environment=NODE_ENV={{ env }}
-{%- if ID %}
-Environment=APP_NAME=GE_{{ AppName|lower }}
-Environment=TABLE={{ ID }}
+{%- if ID < 9 %}
+Environment=APP_NAME=bot0{{ ID }}
+Environment=PORT=1230{{ ID }}
+{% else %}
+Environment=APP_NAME=bot{{ ID }}
+Environment=PORT=123{{ ID }}
 {%- endif %}
 Environment=NODE_PATH=/usr/lib/node_modules
 
