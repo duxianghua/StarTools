@@ -1,5 +1,5 @@
 [Unit]
-Description=NodeJS Game for {{ AppName }} {{ GameType }} {{ ID }}
+Description=NodeJS Game [{{ AppName }} {{ ProjectName }} {{ ID }}]
 Requires=network.target
 After=syslog.target network.target
 
@@ -8,7 +8,7 @@ ExecStart=/usr/bin/node {{ exec_file }}
 ExecReload=/bin/kill -TERM $MAINPID
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=NodeJS P2P-{{ AppName }}-{{ ID }}
+SyslogIdentifier=NodeJS {{ ProjectName }}-{{ AppName }}-{{ ID }}
 User=root
 Group=root
 KillSignal=SIGTERM
@@ -18,7 +18,7 @@ RestartSec=2
 StartLimitInterval=20s
 StartLimitBurst=1
 Environment=NODE_ENV={{ env }}
-Environment=APP_NAME=GE_{{ AppName }}
+Environment=APP_NAME=GE_{{ AppName|lower }}
 Environment=TABLE={{ ID }}
 Environment=NODE_PATH=/usr/lib/node_modules
 

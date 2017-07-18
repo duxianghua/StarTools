@@ -23,7 +23,7 @@ class GameCLI(GameOptionPares):
         self.parse_args()
         self.analyze_service_name()
         self.config['file'] = os.path.join(BASE_DIR, 'config/staging/service.conf')
-        self.config['env'] = 'staging'
+        self.config['env'] = os.environ["RUN_ENV"]
         if self.config['action'] == 'start':
             self.start()
         elif self.config['action'] == 'stop':
