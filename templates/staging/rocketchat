@@ -1,5 +1,5 @@
 [Unit]
-Description=NodeJS Service {{ ProjectName }} {% if AppName %}-{{ AppName }}{% endif %} {% endif %}{% if ID %}-{{ ID }}{% endif %}
+Description=NodeJS Service {{ ProjectName }} {% if AppName %}-{{ AppName }}{% endif %} {% if ID %}-{{ ID }}{% endif %}
 Requires=network.target
 After=syslog.target network.target
 
