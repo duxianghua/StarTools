@@ -105,9 +105,8 @@ class CreateService(object):
 class TaskMQ(CreateService):
     def generate_args(self):
         _kwargs = {}
-        game_list = []
         with open(self.options['gamecode'], 'r') as f:
-            game_list = f.read().split('\n')
+            game_list = f.read().split()
         print game_list
         if self.options['id_list'] != [0, 1, 1]:
             for game in game_list:
