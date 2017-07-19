@@ -58,11 +58,8 @@ class CreateService(object):
         super(CreateService, self).__init__()
 
     def set_options(self, section, file=None):
-        #if not file:
-        #   file = os.path.join(BASE_DIR, 'saltfish/config/staging/service.conf')
         c = ConfigParser.ConfigParser()
         l = c.read(file)
-        #os.path.isfile('saltfish/config/service.conf')
         if c.has_section(section):
             for i in c.options(section):
                 self.options[i] = c.get(section, i)
@@ -119,8 +116,3 @@ def nodejs(*args, **kwargs):
         s.run()
     except ServiceError as e:
         sys.stderr.write(e.message + '\n')
-
-#a=ServiceOptionPares()
-#'--project p2p  --appname bigtwo --startid 10 --endid 10'.split()
-#a.parse_args()
-#nodejs(**a.config)
