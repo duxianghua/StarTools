@@ -106,14 +106,14 @@ class TaskMQ(CreateService):
     def generate_args(self):
         _kwargs = {}
         game_list = []
-        with open(self.options['gamecode', 'r']) as f:
-            game_list.append(f.readline())
+        with open(self.options['gamecode'], 'r') as f:
+            game_list = f.read().split('\n')
         print game_list
         if self.options['id_list'] != [0, 1, 1]:
             for game in game_list:
-                for i in self.options['id_list']:
-                    _kwargs['name'] = self.generate_name(GameName=game, **self.options)
+                for i in range(*self.options['id_list']):
                     _kwargs['ID'] = i
+                    _kwargs['name'] = self.generate_name(GameName=game, ID=i, **self.options)
                     _kwargs['file'] = os.path.join(self.options['service_dir'],
                                                    _kwargs['name'] + '.' + self.options['suffix'])
                     yield dict(_kwargs, **self.options)
