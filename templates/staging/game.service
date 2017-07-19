@@ -19,7 +19,7 @@ StartLimitInterval=20s
 StartLimitBurst=3
 Environment=NODE_ENV={{ env }}
 {%- if ID %}
-Environment=APP_NAME=GE_{{ AppName|lower }}
+Environment=APP_NAME=ge_{{ AppName|lower }}
 Environment=TABLE={{ ID }}
 {%- endif %}
 Environment=NODE_PATH=/usr/lib/node_modules
