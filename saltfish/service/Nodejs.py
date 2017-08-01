@@ -124,6 +124,11 @@ class TaskMQ(CreateService):
                 yield dict(_kwargs, **self.options)
 
 
+class PHPDaemon(CreateService):
+    def generate_args(self):
+        _kwargs = {}
+        
+
 def taskmq(*args, **kwargs):
     try:
         s = TaskMQ(*args, **kwargs)

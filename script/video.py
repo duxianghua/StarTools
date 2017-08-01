@@ -2,18 +2,18 @@
 import subprocess
 import os
 import sys
-import httplib2
 import time
 import ConfigParser
 import json
 import commands
+import argparse
+import httplib2
 
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.file import Storage
 from oauth2client.tools import argparser, run_flow
-
 
 class MakeVideo(object):
     config = {
@@ -66,20 +66,39 @@ class MakeVideo(object):
                 self.config['error'] = c.stderr.read()
                 self._exit()
 
-    def watermark(self, video, image, outdir='/video'):
+    def watermark(self, video, image, outdir='/data/video', *args, **kwargs):
         # cmd = 'ffmpeg -i {video} -loop 1 -i {image} -acodec copy -filter_complex "[1:v] fade=in:st=3:d=0 [logo]; [0:v][logo] overlay=0:0" -t 5 {outfile}'
+        cmd_str = 'ffmpeg -i {video} -loop 1 -i {image} -acodec copy -filter_complex "[1:v] fade=in:st={stime}:d=0 [logo]; [0:v][logo] overlay=0:0" -t {duration} {outfile}'
         self.gettime(video)
-        st = self.formatduration(self.config['duration']) - 2
-        outfile = os.path.join(outdir, '%s.mp4'%hash(time.time()))
-        cmd = 'ffmpeg -i {video} -loop 1 -i {image} -acodec copy -filter_complex "[1:v] fade=in:st=3:d=0 [logo]; [0:v][logo] overlay=0:0" -t 5 {outfile}'.format(video=video,
-                                                                                                                                                                 image=image,
-                                                                                                                                                                 outfile=outfile)
-        status = os.system(cmd)
-        if status == 0:
-            sys.stdout.write(outfile)
-            sys.exit(0)
+        st = self.config['_time'] - 2
+        self.config['jobid'] = hash(time.time())
+        outfile = os.path.join(outdir, '%s.mp4'%self.config['jobid'])
+        command = cmd_str.format(video=video, image=image, outfile=outfile, stime=st, duration=self.config['_time'])
+        c = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
+        c.communicate()
+        if c.returncode == 0:
+            self.config['outfile'] = outfile
+            self.extract()
+            os.remove(video)
+            self._exit()
         else:
-            sys.exit(1)
+            self.config['error'] = c.stderr.read()
+            self._exit()
+
+    def extract(self):
+        cmd_str = 'ffmpeg -i {video} -y -f image2 -ss {sstime} -t 0.01 -s 528x312 {image}'
+        cfg = {
+            'sstime': self.config['_time'] - 0.2,
+            'video': self.config['outfile'],
+            'image': os.path.join('/data/image', '%s.jpg'%self.config['jobid'])
+        }
+        command = cmd_str.format(**cfg)
+        c = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
+        c.communicate()
+        if c.returncode == 0:
+            self.config['image'] = cfg['image']
+        else:
+            self.config['error'] = 'extract frname fail'
 
     def gettime(self, video):
         # cmd = 'ffmpeg -i test.mp4 2>&1 | grep 'Duration' | cut -d ' ' -f 4 | sed s/,//'
@@ -88,13 +107,17 @@ class MakeVideo(object):
             returncode, rev = commands.getstatusoutput(cmd)
             if returncode == 0:
                 self.config['duration'] = rev
+                self.config['_time'] = self.formatduration(rev)
             else:
                 self.config['error'] = 'Failed to get video duration'
                 self._exit()
+        else:
+            self.config['error'] = 'No such file or directory: "%s"' %video
+            self._exit()
 
     def formatduration(self, t):
         l = t.split(':')
-        return int(l[0])*3600 + int(l[1])*60 + float(l[2])
+        return int(int(l[0])*3600 + int(l[1])*60 + float(l[2]))
 
 
     def is_runing(self):
@@ -114,7 +137,7 @@ class MakeVideo(object):
         self.config['duration'] = duration
         self.config['outfile'] = '/tmp/%s.mp4' % self.config['jobid']
         if self.is_runing():
-            self.config['error'] = 'Job "%s" already exists' % url
+            self.config['error'] = 'Job "%s" already exists' % self.config['rtmp_url']
             self._exit()
         self.make_video()
         self.set_options()
@@ -209,19 +232,20 @@ class upload_video:
             sys.stderr.write(msg)
             sys.exit(2)
 
-
 def set_parser():
-    argparser.add_argument("--file", help="File Name")
-    argparser.add_argument("--title", help="Video title", default="upload video TEXT!!")
-    argparser.add_argument("--description", default="Test Description")
-    argparser.add_argument("--category", default="22")
-    argparser.add_argument("--privacyStatus", default="public")
-    argparser.add_argument("--url", default=None)
-    argparser.add_argument("--jobid", default=None)
-    argparser.add_argument("--duration", default=None)
-    argparser.add_argument("--video", default=None)
-    argparser.add_argument("--image", default=None)
-    argparser.add_argument('action', choices=['start', 'stop', 'upload', 'watermark'])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--file", help="File Name")
+    parser.add_argument("--title", help="Video title", default="video....")
+    parser.add_argument("--description", default="Test Description")
+    parser.add_argument("--category", default="22")
+    parser.add_argument("--privacyStatus", default="public")
+    parser.add_argument("--url", default=None)
+    parser.add_argument("--jobid", default=None)
+    parser.add_argument("--duration", default=None)
+    parser.add_argument("--video", default=None)
+    parser.add_argument("--image", default=None)
+    parser.add_argument('action', choices=['start', 'stop', 'upload', 'watermark'])
+    return parser
 
 
 def man(options):
@@ -239,6 +263,6 @@ def man(options):
 
 
 if __name__ == '__main__':
-    set_parser()
-    args = argparser.parse_args()
+    p = set_parser()
+    args = p.parse_args()
     man(args)
