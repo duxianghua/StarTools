@@ -4,7 +4,7 @@ Requires=network.target
 After=syslog.target network.target
 
 [Service]
-ExecStart=/usr/bin/node /usr/share/nodejs/taskmq-worker/index.js
+ExecStart=/usr/bin/node /var/nodejs/{{ ProjectName }}/index.js
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier= {{ ROLE }}-{{ AppName }}-{{ AppGame }}-{{ SERVICEID }}
