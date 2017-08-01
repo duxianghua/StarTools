@@ -4,10 +4,10 @@ Requires=network.target
 After=syslog.target network.target
 
 [Service]
-ExecStart=/usr/bin/node /var/nodejs/{{ ProjectName }}/index.js
+ExecStart=/usr/bin/node /var/nodejs/{{ ProjectName|lower }}/index.js
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier= {{ ROLE }}-{{ AppName }}-{{ AppGame }}-{{ SERVICEID }}
+SyslogIdentifier= {{ {{ ProjectName }} }}-{{ AppName }}{% if SERVICEID %}-{{ SERVICEID }}{% endif %}
 User=root
 Group=root
 KillSignal=SIGTERM
@@ -16,9 +16,9 @@ Restart=on-failure
 RestartSec=2
 StartLimitInterval=10s
 StartLimitBurst=2
-Environment=NODE_ENV={{ ENV }}
+Environment=NODE_ENV={{ env }}
 Environment=APP_NAME=GE_{{ AppName|lower }}
-Environment=APP_GAME={{ AppGame }}
+Environment=APP_GAME={{ AppName }}
 Environment=NODE_PATH=/usr/lib/node_modules
 [Install]
 WantedBy=multi-user.target
