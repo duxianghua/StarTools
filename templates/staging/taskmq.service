@@ -1,5 +1,5 @@
 [Unit]
-Description=Taskmq worker runlight_monkeystory_syncres
+Description={{ ProjectName|lower }} runlight_monkeystory_syncres
 Requires=network.target
 After=syslog.target network.target
 
@@ -7,7 +7,7 @@ After=syslog.target network.target
 ExecStart=/usr/bin/node /var/nodejs/{{ ProjectName|lower }}/index.js
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier= {{ ProjectName }}-{{ AppName }}{% if SERVICEID %}-{{ SERVICEID }}{% endif %}
+SyslogIdentifier= {{ ProjectName }}-{{ AppName }}{% if ID %}-{{ ID }}{% endif %}
 User=root
 Group=root
 KillSignal=SIGTERM
@@ -17,7 +17,7 @@ RestartSec=2
 StartLimitInterval=10s
 StartLimitBurst=2
 Environment=NODE_ENV={{ env }}
-Environment=APP_NAME=GE_{{ AppName|lower }}
+Environment=APP_NAME=GE_{{ AppName }}
 Environment=APP_GAME={{ game }}
 Environment=NODE_PATH=/usr/lib/node_modules
 [Install]
