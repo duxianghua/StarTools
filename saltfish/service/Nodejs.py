@@ -112,12 +112,14 @@ class TaskMQ(CreateService):
             for game in game_list:
                 for i in range(*self.options['id_list']):
                     _kwargs['ID'] = i
+                    _kwargs['game'] = game
                     _kwargs['name'] = self.generate_name(GameName=game, ID=i, **self.options)
                     _kwargs['file'] = os.path.join(self.options['service_dir'],
                                                    _kwargs['name'] + '.' + self.options['suffix'])
                     yield dict(_kwargs, **self.options)
         else:
             for game in game_list:
+                _kwargs['game'] = game
                 _kwargs['name'] = self.generate_name(GameName=game, **self.options)
                 _kwargs['file'] = os.path.join(self.options['service_dir'],
                                                _kwargs['name'] + '.' + self.options['suffix'])
