@@ -107,7 +107,6 @@ class TaskMQ(CreateService):
         _kwargs = {}
         with open(self.options['gamecode'], 'r') as f:
             game_list = f.read().split()
-        print game_list
         if self.options['id_list'] != [0, 1, 1]:
             for game in game_list:
                 for i in range(*self.options['id_list']):
