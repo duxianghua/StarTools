@@ -18,7 +18,7 @@ StartLimitInterval=10s
 StartLimitBurst=2
 Environment=NODE_ENV={{ env }}
 Environment=APP_NAME=GE_{{ AppName|lower }}
-Environment=APP_GAME={{ AppName }}
+Environment=APP_GAME={{ game }}
 Environment=NODE_PATH=/usr/lib/node_modules
 [Install]
 WantedBy=multi-user.target
