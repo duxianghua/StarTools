@@ -1,0 +1,23 @@
+[Unit]
+Description=NodeJS Service For {{ ProjectName }}
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+ExecStart=/usr/bin/node {{ exec_file }}
+ExecReload=/bin/kill -TERM $MAINPID
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=NodeJS-{{ ProjectName }}
+User=root
+Group=root
+KillSignal=SIGTERM
+KillMode=process
+Restart=on-failure
+RestartSec=2
+StartLimitInterval=20s
+StartLimitBurst=1
+Environment=NODE_PATH=/usr/lib/node_modules
+
+[Install]
+WantedBy=multi-user.target

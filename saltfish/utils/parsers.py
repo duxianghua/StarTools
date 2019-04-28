@@ -53,6 +53,6 @@ class SaltfishJsOptionPares(OptionParser):
 class NodejsServiceOptionPares(OptionParser):
     def _set_arguments(self):
         self.add_argument('action', choices=['start', 'stop', 'restart', 'reload', 'kill', 'status', 'create'],metavar='action')
-        self.add_argument('service',metavar='action')
+        self.add_argument('service',metavar='ServerName')
         #self.add_argument('TableID')
         #self.add_argument('-P','-project')

@@ -1,0 +1,28 @@
+[Unit]
+Description=NodeJS {{ ProjectName }}
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+ExecStart=/usr/bin/node {{ exec_file }}
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier={{ ProjectNmae }}{% if ID %}-{{ ID }}{% endif %}
+User=root
+Group=root
+KillSignal=SIGTERM
+KillMode=process
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=30s
+StartLimitBurst=3
+Environment=NODE_ENV={{ env }}
+{%- if ID %}
+Environment=ROBOTID={{ ID }}
+Environment=SERVERID=1
+Environment=XVFBSERVERNUM={{ ID }}
+{%- endif %}
+Environment=NODE_PATH=/usr/lib/node_modules
+
+[Install]
+WantedBy=multi-user.target
